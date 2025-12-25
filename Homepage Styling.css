@@ -66,44 +66,60 @@ nav ul.menu li ul.dropdown li a {
 
 /* SECTIONS */
 .section {
-    height: 575px;
+    min-height: 575px;
+    height: auto;
     background-color: #fefcef; /* light background for content */
     border-bottom: 5px solid #7e212a;
     display: flex;
+    padding: 60px 20px;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-center;
 }
 
-#section1 {background-image: url(Visuals/Anti-Bully\ Pic\ 1.avif);
-background-repeat: no-repeat;
-background-size: cover;
-background-attachment: scroll;
+/* HERO SECTION */
+.hero {
+  position: relative;
+  height: 575px;
+  background-image: url("Visuals/Anti-Bully Pic 1.avif");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
 }
 
-#p1s1 {padding: 15px; 
-    margin: 10px; 
-    border-style: solid;
-    border-width: 2px; 
-    border-color: #A24857;
-    background-color:black; 
-    border-radius: 25px;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    color: #fefcef;
+/* OVERLAY BLOCK (covers eyes & mouth) */
+.hero-overlay {
+  position: absolute;
+  top: 36%; /* aligns over eyes */
+  transform: translateY(-38%);
+  background-color: rgba(254, 252, 239, 0.92);
+  padding: 20px 30px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 90%;
+  width: 500px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-#section1 input[type="text"] {
-    margin-top: 1em;
-    padding: 0.5em;
-    width: 50%;
-    max-width: 400px;
-    border: 2px solid #7e212a;
-    border-radius: 5px;
-    font-size: 1em;
-    height: 50px;
-    color: #fefcef;
-    background-color: black;
+/* TEXT */
+.hero-overlay h1 {
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  font-weight: bold;
+}
+
+.hero-overlay h2 {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  margin: 10px 0 20px;
+}
+
+/* SEARCH BOX (mouth level) */
+.hero-overlay input[type="text"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 2px solid #7e212a;
+  border-radius: 6px;
 }
 
 #section2 {
@@ -233,21 +249,223 @@ background-attachment: scroll;
     }
 }
 
-.section4 {
-    background-color: #fefcef;
+
+/* SECTION 4 */
+#section4 {
+  background-color: #fefcef;
+  padding: 60px 20px;
+  height: auto;
 }
 
-#containers {
-display: flex;
+.section-heading {
+  color: #7e212a;
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* GRID LAYOUT (2x2) */
+.accordion-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+/* ACCORDION ITEM */
+.accordion-item {
+  background-color: #7e212a;
+  border: 2px solid darkred;
+  border-radius: 15px;
+  padding: 10px 20px;
+  overflow: hidden;
+}
+
+/* SUMMARY */
+.accordion-item summary {
+  font-size: 30px;
+  font-weight: bold;
+  color: #fefcef;
+  cursor: pointer;
+  list-style: none;
+  padding: 15px 0;
+}
+
+/* REMOVE DEFAULT MARKER */
+.accordion-item summary::-webkit-details-marker {
+  display: none;
+}
+
+/* CONTENT (ANIMATED) */
+.accordion-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.4s ease;
+}
+
+/* WHEN OPEN */
+.accordion-item[open] .accordion-content {
+  max-height: 500px; /* enough for content */
+  opacity: 1;
+}
+
+/* TEXT */
+.accordion-content p,
+.accordion-content ul {
+  color: white;
+  font-size: 22px;
+  line-height: 1.6;
+  margin: 20px 0;
+}
+
+.accordion-content ul {
+  padding-left: 20px;
+}
+
+/* HOVER */
+.accordion-item summary:hover {
+  opacity: 0.9;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .accordion-grid {
+    grid-template-columns: 1fr; /* stack vertically */
+  }
+
+  .accordion-item summary {
+    font-size: 26px;
+  }
+
+  .accordion-content p,
+  .accordion-content ul {
+    font-size: 20px;
+  }
+}
+
+
+
+
+
+/* WRAPPER */
+.staff-social-wrapper {
+  max-width: 1200px;
+  margin: 60px auto 0;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* STAFF BOX */
+.staff-box {
+  background: #7e212a;
+  border-radius: 20px;
+  padding: 30px;
+  color: white;
+}
+
+/* SLIDER AREA */
+.staff-slider {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 30px; /* THIS fixes arrow overlap */
+}
+
+/* IMAGE HOLDER */
+.slider {
+  display: flex;
+  justify-content: center;
+}
+
+/* STAFF IMAGE */
+.slider img {
+  width: 170px;
+  height: 210px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* ARROWS */
+.slider-btn {
+  background: #fefcef;
+  color: #7e212a;
+  border: none;
+  font-size: 26px;
+  padding: 10px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider-btn:hover {
+  background: #e9e6d8;
+}
+
+/* DETAILS */
+.staff-details {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.staff-details h3 {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.staff-details .role {
+  font-weight: bold;
+}
+
+.staff-details .desc {
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+/* SOCIAL BOX */
+.social-box {
+  background: #fefcef;
+  border: 3px solid #7e212a;
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+}
+
+.social-box h3 {
+  color: #7e212a;
+  margin-bottom: 20px;
+}
+
+/* SOCIAL ICONS */
+.social-icons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.social-icons img {
+  width: 45px;
+  height: 45px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .staff-social-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .staff-slider {
     gap: 20px;
+  }
 }
 
-#mNv {
-    flex: 1;   /* both divs take equal width */
-    padding: 20px;
-    background-color: #7e212a;
-    border: 2px solid darkred;
-}
+
+
+
+
 
 /* RESPONSIVE */
 @media screen and (max-width: 768px) {
