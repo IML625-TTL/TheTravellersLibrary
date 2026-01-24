@@ -96,6 +96,12 @@ nav ul.menu li ul.dropdown li a {
 #section1 {
     height: calc(100vh - clamp(60px, 10vh, 75px));
     overflow: hidden;
+    background-color: #f0e29a;
+    background-image: url('Visuals/Section\ 1\ BG.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
 }
 
 .hero-content {
@@ -107,6 +113,8 @@ nav ul.menu li ul.dropdown li a {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-content svg {
@@ -120,7 +128,7 @@ nav ul.menu li ul.dropdown li a {
 
 /* SECTION 2 */
 #section2 {
-    background-color: #7e212a;
+    background-color: #86cfff;
     position: relative;
     min-height: 100vh;
     height: 100vh;
@@ -128,7 +136,7 @@ nav ul.menu li ul.dropdown li a {
 
 #h2s2 {
     text-align: center;
-    color: aliceblue;
+    color: black;
     font-size: clamp(28px, 5vw, 50px);
     margin-bottom: clamp(15px, 2vh, 20px);
 }
@@ -186,13 +194,13 @@ nav ul.menu li ul.dropdown li a {
     align-items: center;
     height: calc(100vh - clamp(50px, 8vh, 60px));
     overflow: hidden;
-    background-color: #A24857;
+    background-color: #f0e29a;
     padding: clamp(15px, 3vh, 30px) clamp(10px, 2vw, 20px) clamp(10px, 2vh, 20px) clamp(10px, 2vw, 20px);
 }
 
 #h2s3 {
     margin-bottom: clamp(15px, 3vh, 40px);
-    color: aliceblue;
+    color: black;
     font-size: clamp(28px, 5vw, 50px);
     flex-shrink: 0;
 }
@@ -201,17 +209,17 @@ nav ul.menu li ul.dropdown li a {
 .services-row {
     display: flex;
     justify-content: center;
-    align-items: stretch;
+    align-items: center;
     gap: clamp(15px, 2vw, 25px);
     width: 100%;
     max-width: 1200px;
-    flex: 1;
-    max-height: 100%;
 }
 
 .service-box {
     flex: 1;
     max-width: 260px;
+    height: clamp(180px, 30vh, 280px);
+    max-height: 280px;
     background-color: #fefcef;
     border: 3px solid #7e212a;
     border-radius: 15px;
@@ -227,9 +235,10 @@ nav ul.menu li ul.dropdown li a {
 
 .service-box img {
     max-width: 80%;
-    max-height: clamp(60px, 12vh, 120px);
+    height: clamp(80px, 15vh, 120px);
+    max-height: 120px;
     object-fit: contain;
-    flex-shrink: 1;
+    flex-shrink: 0;
 }
 
 .service-box span {
@@ -242,8 +251,8 @@ nav ul.menu li ul.dropdown li a {
 
 /* FOOTER */
 footer {
-    background-color: #7e212a;
-    color: white;
+    background-color: #86cfff;
+    color: black;
     width: 100%;
     padding: clamp(8px, 1.5vh, 10px) clamp(10px, 2vw, 20px);
     height: clamp(50px, 8vh, 60px);
@@ -295,6 +304,12 @@ footer {
         max-width: 45%;
         min-width: 150px;
         flex: 0 1 45%;
+        height: clamp(160px, 25vh, 220px);
+        max-height: 220px;
+    }
+    .service-box img {
+        height: clamp(60px, 12vh, 100px);
+        max-height: 100px;
     }
 }
 
@@ -328,6 +343,12 @@ footer {
         max-width: 100%;
         min-width: 100%;
         flex: 0 1 auto;
+        height: clamp(140px, 20vh, 180px);
+        max-height: 180px;
+    }
+    .service-box img {
+        height: clamp(50px, 10vh, 80px);
+        max-height: 80px;
     }
     .services-row {
         flex-direction: column;
@@ -357,7 +378,12 @@ footer {
     #h2s3 {
         margin-bottom: 15px;
     }
+    .service-box {
+        height: clamp(140px, 25vh, 180px);
+        max-height: 180px;
+    }
     .service-box img {
-        max-height: 60px;
+        height: clamp(50px, 12vh, 70px);
+        max-height: 70px;
     }
 }
