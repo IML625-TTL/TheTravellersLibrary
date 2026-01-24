@@ -11,7 +11,8 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #7e212a;
+    background-color: #86cfff;
+    color: black;
     padding: 0;
     top: 0;
     width: 100%;
@@ -42,8 +43,8 @@ nav ul.menu li a {
 }
 
 nav ul.menu li a:hover {
-    background-color: #fefcef;
-    color: #7e212a;
+    background-color: #999ae8;
+    color: #ffe870;
 }
 
 /* DROPDOWN */
