@@ -53,7 +53,8 @@ nav ul.menu li ul.dropdown {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #7e212a;
+    background-color:#86cfff;
+    color: black;
     list-style: none;
     min-width: 150px;
 }
