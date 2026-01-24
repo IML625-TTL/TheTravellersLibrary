@@ -1,0 +1,159 @@
+/* 1. Load Font (Fail: DISPLAYED.ttf) */
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('DISPLAYED.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f0e29a; 
+    font-family: 'Times New Roman', Times, serif;
+    color: #000;
+}
+
+nav {
+    background-color: #86cfff; 
+    height: 80px; 
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    display: flex;
+    height: 100%;
+}
+
+nav ul li {
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+    border-right: 2px solid #f0e29a; 
+    height: 100%;
+}
+
+nav ul li:last-child {
+    border-right: none;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+#contact {
+    padding: 10px 20px 60px 20px; 
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.main-title {
+    font-family: 'MyCustomFont', sans-serif;
+    font-size: 4.5rem;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.contact-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 80px;
+}
+
+.contact-info {
+    flex: 1.2;
+}
+
+.sub-heading {
+    font-family: 'MyCustomFont', sans-serif;
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+}
+
+.description {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 40px;
+    text-align: justify;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.icon {
+    font-size: 1.8rem;
+    margin-right: 20px;
+}
+
+.contact-form {
+    flex: 1;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    width: 100%;
+    background: white;
+    border: 3px solid black;
+    padding: 15px;
+    margin-bottom: 15px;
+    font-family: 'MyCustomFont', sans-serif;
+    color: black;
+    font-size: 1.1rem;
+}
+
+.contact-form input::placeholder, 
+.contact-form textarea::placeholder {
+    color: black;
+}
+
+.send-btn {
+    background-color: #86cfff;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 35px;
+    font-family: 'MyCustomFont', sans-serif;
+    cursor: pointer;
+}
+
+.security-notice {
+    margin-top: 15px; 
+    font-size: 0.85rem;
+}
+
+footer {
+    background-color: #86cfff;
+    text-align: center;
+    padding: 25px;
+    margin-top: 60px;
+}
+
+footer p {
+    color: white; 
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+
+
+
+
+
+
+
+
