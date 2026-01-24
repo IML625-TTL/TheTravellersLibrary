@@ -6,32 +6,36 @@
     scroll-behavior: smooth;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 /* NAVBAR */
 nav {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     background-color: #86cfff;
-    min-height: 75px;
-    padding: 0 20px;
-    flex-wrap: wrap;
+    width: 100%;
+    height: clamp(60px, 10vh, 75px);
+    padding: 0 clamp(10px, 2vw, 20px);
 }
 
-/* Logo + site title */
 .nav-left {
     display: flex;
     align-items: center;
-    gap: 20px; /* fixed distance between logo and title */
+    flex-wrap: nowrap;
 }
 
 .logo img {
-    height: 60px;
-    display: block;
+    height: clamp(45px, 7vh, 60px);
+    flex-shrink: 0;
 }
 
-.site-title {
-    font-size: 22px;
-    white-space: nowrap; /* prevent breaking below logo */
+.library-name h2 {
+    margin-left: clamp(8px, 1.5vw, 15px);
+    white-space: nowrap;
+    font-size: clamp(12px, 2.5vw, 24px);
 }
 
 /* Menu */
@@ -46,11 +50,12 @@ nav ul.menu li {
 
 nav ul.menu li a {
     display: block;
-    padding: 1em 1.2em;
+    padding: clamp(0.6em, 1vh, 1em) clamp(0.8em, 1.5vw, 1.2em);
     color: #000435;
     text-decoration: none;
     font-weight: bold;
     white-space: nowrap;
+    font-size: clamp(12px, 1.8vw, 16px);
 }
 
 nav ul.menu li a:hover {
@@ -67,7 +72,7 @@ nav ul.menu li ul.dropdown {
     background-color: #86cfff;
     list-style: none;
     min-width: 150px;
-    z-index: 10;
+    z-index: 1000;
 }
 
 nav ul.menu li:hover ul.dropdown {
@@ -80,55 +85,75 @@ nav ul.menu li ul.dropdown li a {
 
 /* SECTIONS */
 .section {
-    min-height: 575px;
-    height: auto;
-    background-color: #fefcef;
-    border-bottom: 5px solid #7e212a;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 60px 20px;
+    padding: clamp(10px, 2vh, 20px);
 }
 
-/* HERO SECTION */
-.hero {
+/* SECTION 1 */
+#section1 {
+    height: calc(100vh - clamp(60px, 10vh, 75px));
+    overflow: hidden;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 900px;
+    height: 100%;
+    max-height: 100%;
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.hero-content svg {
+    max-height: 100%;
+    width: auto;
+}
+
+.hero text {
+    font-weight: bold;
 }
 
 /* SECTION 2 */
 #section2 {
     background-color: #7e212a;
-    overflow: hidden;
     position: relative;
+    min-height: 100vh;
+    height: 100vh;
 }
 
 #h2s2 {
     text-align: center;
     color: aliceblue;
-    margin: 15px;
-    font-size: 50px;
+    font-size: clamp(28px, 5vw, 50px);
+    margin-bottom: clamp(15px, 2vh, 20px);
 }
 
 .slideshow-container {
     width: 80%;
-    height: 80%;
+    max-height: 70%;
     position: relative;
+    margin: 0 auto;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .mySlides {
-    display: none;
     width: 100%;
     height: 100%;
+    display: none;
 }
 
 .mySlides img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    display: block;
+    object-fit: contain;
 }
 
 .prev,
@@ -137,46 +162,51 @@ nav ul.menu li ul.dropdown li a {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    padding: 16px;
+    padding: clamp(12px, 2vh, 16px);
     color: white;
-    font-size: 20px;
+    font-size: clamp(16px, 2.5vw, 20px);
     font-weight: bold;
     background-color: rgba(0, 0, 0, 0.4);
+    user-select: none;
+}
+
+.prev {
+    left: 0;
 }
 
 .next {
     right: 0;
 }
 
-.fade {
-    animation: fade 1.5s;
-}
-
-@keyframes fade {
-    from { opacity: 0.4; }
-    to { opacity: 1; }
-}
-
-/* SECTION 3 */
+/* SECTION 3 + FOOTER CONTAINER */
 #section3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - clamp(50px, 8vh, 60px));
+    overflow: hidden;
     background-color: #A24857;
+    padding: clamp(15px, 3vh, 30px) clamp(10px, 2vw, 20px) clamp(10px, 2vh, 20px) clamp(10px, 2vw, 20px);
 }
 
 #h2s3 {
-    margin-bottom: 40px;
+    margin-bottom: clamp(15px, 3vh, 40px);
     color: aliceblue;
-    font-size: 50px;
+    font-size: clamp(28px, 5vw, 50px);
+    flex-shrink: 0;
 }
 
+/* SERVICE BOXES */
 .services-row {
     display: flex;
     justify-content: center;
     align-items: stretch;
-    gap: 25px;
+    gap: clamp(15px, 2vw, 25px);
     width: 100%;
     max-width: 1200px;
-    height: 60%;
-    margin: 0 auto;
+    flex: 1;
+    max-height: 100%;
 }
 
 .service-box {
@@ -185,47 +215,29 @@ nav ul.menu li ul.dropdown li a {
     background-color: #fefcef;
     border: 3px solid #7e212a;
     border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    font-weight: bold;
-    color: #7e212a;
+    padding: clamp(10px, 2vh, 20px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 15px;
+    gap: clamp(8px, 1.5vh, 15px);
+    font-weight: bold;
+    text-align: center;
 }
 
 .service-box img {
     max-width: 80%;
-    max-height: 120px;
+    max-height: clamp(60px, 12vh, 120px);
     object-fit: contain;
+    flex-shrink: 1;
 }
 
 .service-box span {
-    font-size: 25px;
-    line-height: 50px;
-    min-height: 75px;
+    font-size: clamp(16px, 2.5vw, 25px);
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-/* RESPONSIVE */
-@media screen and (max-width: 900px) {
-    .services-row { flex-wrap: wrap; height: auto; }
-    .service-box { max-width: 45%; }
-}
-
-@media screen and (max-width: 500px) {
-    .service-box { max-width: 100%; }
-}
-
-@media screen and (max-width: 768px) {
-    nav ul.menu {
-        flex-wrap: wrap;
-        justify-content: flex-start;
-    }
+    flex-shrink: 0;
 }
 
 /* FOOTER */
@@ -233,7 +245,10 @@ footer {
     background-color: #7e212a;
     color: white;
     width: 100%;
-    padding: 10px 20px;
+    padding: clamp(8px, 1.5vh, 10px) clamp(10px, 2vw, 20px);
+    height: clamp(50px, 8vh, 60px);
+    display: flex;
+    align-items: center;
 }
 
 .footer-container {
@@ -241,26 +256,108 @@ footer {
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
 }
 
 .footer-left {
     max-width: 70%;
-    line-height: 30px;
+    line-height: clamp(20px, 3vh, 30px);
+    font-size: clamp(10px, 1.5vw, 16px);
 }
 
 .footer-right {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: clamp(8px, 1.5vw, 12px);
 }
 
 .footer-right img {
-    width: 28px;
-    height: 28px;
+    width: clamp(20px, 3.5vh, 28px);
+    height: clamp(20px, 3.5vh, 28px);
     object-fit: contain;
     cursor: pointer;
 }
 
 #footerimg {
-    width: 32px;
+    width: clamp(24px, 4vh, 32px);
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 900px) {
+    .services-row {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: clamp(10px, 2vw, 15px);
+        overflow-y: auto;
+    }
+    .service-box {
+        max-width: 45%;
+        min-width: 150px;
+        flex: 0 1 45%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    nav {
+        flex-wrap: wrap;
+        height: auto;
+        min-height: clamp(100px, 15vh, 120px);
+    }
+    .library-name h2 {
+        margin-left: clamp(5px, 1vw, 10px);
+    }
+    nav ul.menu {
+        flex-direction: column;
+        width: 100%;
+    }
+    nav ul.menu li {
+        width: 100%;
+    }
+    nav ul.menu li a {
+        padding: 0.6em 1em;
+    }
+    nav ul.menu li ul.dropdown {
+        position: static;
+        width: 100%;
+    }
+    #section1 {
+        height: calc(100vh - clamp(100px, 15vh, 120px));
+    }
+    .service-box {
+        max-width: 100%;
+        min-width: 100%;
+        flex: 0 1 auto;
+    }
+    .services-row {
+        flex-direction: column;
+        gap: clamp(10px, 1.5vh, 15px);
+    }
+    .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .footer-left {
+        max-width: 100%;
+    }
+    .footer-right {
+        align-self: flex-start;
+    }
+    footer {
+        height: auto;
+        min-height: clamp(80px, 12vh, 100px);
+    }
+    #section3 {
+        height: calc(100vh - clamp(80px, 12vh, 100px));
+    }
+}
+
+@media screen and (max-height: 600px) {
+    #h2s3 {
+        margin-bottom: 15px;
+    }
+    .service-box img {
+        max-height: 60px;
+    }
 }

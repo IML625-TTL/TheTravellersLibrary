@@ -14,9 +14,13 @@
     <nav id="navbar">
         <div class="nav-left">
             <div class="logo">
-                <a href="index.html"><img src="Visuals/TXL Logo.jpeg" alt="Logo"></a>
+                <a href="index.html">
+                    <img src="Visuals/TXL Logo.jpeg" alt="Logo">
+                </a>
             </div>
-            <h2 class="site-title">TOURISM X LIBRARY</h2>
+            <div class="library-name">
+                <h2>TOURISM X LIBRARY</h2>
+            </div>
         </div>
 
         <ul class="menu">
@@ -36,31 +40,39 @@
 
     <!-- SECTION 1 : HERO -->
     <section class="section hero" id="section1">
-        <svg viewBox="0 0 500 240" width="100%" height="100%">
-            <!-- Main curve -->
-            <path id="curve-main" d="M10,140 Q250,50 490,140" fill="transparent" />
-            <!-- Sub curve -->
-            <path id="curve-sub" d="M30,160 Q250,90 470,160" fill="transparent" />
-            <!-- Main text -->
-            <text font-family="Arial" font-size="20" fill="black">
-                <textPath href="#curve-main" startOffset="50%" text-anchor="middle">
-                    WELCOME TO TOURISM X LIBRARY
-                </textPath>
-            </text>
-            <!-- Sub text -->
-            <text font-family="Arial" font-size="14" fill="black">
-                <textPath href="#curve-sub" startOffset="50%" text-anchor="middle">
-                    Guiding Pathways to Tourism Knowledge
-                </textPath>
-            </text>
-            <!-- Search box -->
-            <rect x="160" y="180" width="180" height="26" rx="13" ry="13" fill="#f2f2f2" stroke="#ccc" />
-            <!-- Icon section -->
-            <rect x="310" y="180" width="30" height="26" rx="13" ry="13" fill="#d9d9d9" />
-            <line x1="310" y1="183" x2="310" y2="203" stroke="#bbb" />
-            <circle cx="325" cy="193" r="5" stroke="#555" stroke-width="1.5" fill="none" />
-            <line x1="328" y1="196" x2="332" y2="200" stroke="#555" stroke-width="1.5" />
-        </svg>
+        <div class="hero-content">
+            <svg viewBox="0 0 500 240" width="100%" height="100%">
+
+                <!-- Main curve -->
+                <path id="curve-main" d="M10,140 Q250,50 490,140" fill="transparent" />
+
+                <!-- Sub curve -->
+                <path id="curve-sub" d="M30,160 Q250,90 470,160" fill="transparent" />
+
+                <!-- Main text -->
+                <text font-family="Arial" font-size="28" fill="black" font-weight="bold">
+                    <textPath href="#curve-main" startOffset="50%" text-anchor="middle">
+                        WELCOME TO TOURISM X LIBRARY
+                    </textPath>
+                </text>
+
+                <!-- Sub text -->
+                <text font-family="Arial" font-size="18" fill="black" font-weight="bold">
+                    <textPath href="#curve-sub" startOffset="50%" text-anchor="middle">
+                        Guiding Pathways to Tourism Knowledge
+                    </textPath>
+                </text>
+
+                <!-- Search bar -->
+                <rect x="110" y="180" width="280" height="30" rx="15" ry="15" fill="#f2f2f2" stroke="#ccc" />
+
+                <!-- Magnifying glass -->
+                <rect x="395" y="180" width="30" height="30" rx="15" ry="15" fill="#d9d9d9" />
+                <circle cx="410" cy="195" r="5" stroke="#555" stroke-width="1.5" fill="none" />
+                <line x1="413" y1="198" x2="417" y2="202" stroke="#555" stroke-width="1.5" />
+
+            </svg>
+        </div>
     </section>
 
     <!-- SECTION 2 : NEWS -->
@@ -68,18 +80,22 @@
         <h2 id="h2s2">News</h2>
 
         <div class="slideshow-container">
+
             <div class="mySlides fade">
                 <img src="Visuals/Ann. Banner 1.jfif" alt="Slide 1">
             </div>
+
             <div class="mySlides fade">
                 <img src="Visuals/Ann. Banner 2.jfif" alt="Slide 2">
             </div>
+
             <div class="mySlides fade">
                 <img src="Visuals/Ann. Banner 3.jfif" alt="Slide 3">
             </div>
 
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
         </div>
     </section>
 
@@ -88,6 +104,7 @@
         <h2 class="section-title" id="h2s3">Our Services</h2>
 
         <div class="services-row">
+
             <div class="service-box">
                 <a href="http://10.39.111.43:8081" target="_blank">
                     <img src="Visuals/Koha Logo.png" id="koha">
@@ -108,12 +125,14 @@
                 </a>
                 <span>Institutional Repository</span>
             </div>
+
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
         <div class="footer-container">
+
             <div class="footer-left">
                 © Unity Space Library, 2025. This library portal is to complete a group project under IML625
             </div>
@@ -124,31 +143,28 @@
                 <a href="#"><img src="SMP Pic/X Logo.png" alt="X"></a>
                 <a href="#"><img src="SMP Pic/TikTok Logo.png" alt="TikTok"></a>
                 <a href="#"><img src="SMP Pic/LinkedIn Logo.png" alt="LinkedIn"></a>
-                <a href="#navbar">
-                    <img src="Visuals/Top Arrow.webp" id="footerimg" alt="Back to top">
-                </a>
+                <a href="#navbar"><img src="Visuals/Top Arrow.webp" id="footerimg" alt="Back to top"></a>
             </div>
+
         </div>
     </footer>
 
-    <!-- SLIDESHOW SCRIPT -->
-    <script>
-        let slideIndex = 1;
-        showSlides(slideIndex);
+<script>
+let slideIndex = 1;
+showSlides(slideIndex);
 
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
 
-        function showSlides(n) {
-            let slides = document.getElementsByClassName("mySlides");
-            if (n > slides.length) slideIndex = 1;
-            if (n < 1) slideIndex = slides.length;
-            for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";
-            slides[slideIndex - 1].style.display = "block";
-        }
-    </script>
+function showSlides(n) {
+    let slides = document.getElementsByClassName("mySlides");
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+    slides[slideIndex - 1].style.display = "block";
+}
+</script>
 
 </body>
-
 </html>
