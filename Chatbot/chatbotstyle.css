@@ -1,0 +1,91 @@
+:root {
+    --primary-blue: #86CFFF;
+    --primary-yellow: #F0E29A;
+    --bot-bg: #f1f1f1;
+}
+
+body {
+    background-color: var(--primary-yellow); /* Background from screenshot */
+    font-family: 'Times New Roman', serif; /* Font Option 2 */
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-card {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 350px;
+    height: 500px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: none; /* Toggled by JS */
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.chat-card.active {
+    display: flex;
+}
+
+.header {
+    background: var(--primary-blue); /* Blue from screenshot */
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content { display: flex; align-items: center; gap: 10px; }
+
+.header-info h2 {
+    margin: 0;
+    font-family: 'Archivo Black', sans-serif; /* Paalalabas Wide Style */
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.header-info p { margin: 0; font-size: 11px; opacity: 0.9; }
+
+.close-btn { background: none; border: none; color: white; font-size: 22px; cursor: pointer; }
+
+.chat-body {
+    flex: 1; padding: 20px;
+    overflow-y: auto; display: flex;
+    flex-direction: column; gap: 10px;
+}
+
+.msg {
+    max-width: 80%; padding: 10px 15px;
+    border-radius: 15px; font-size: 14px;
+}
+
+.bot { background: var(--bot-bg); align-self: flex-start; border-bottom-left-radius: 2px; }
+
+.user { background: var(--primary-blue); color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+
+.footer { padding: 15px; display: flex; gap: 8px; border-top: 1px solid #eee; }
+
+input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 20px; outline: none; }
+
+.send-btn {
+    background: var(--primary-blue); color: white;
+    border: none; padding: 5px 15px; border-radius: 15px;
+    font-family: 'Monsieur La Doulaise', cursive; /* Brittany Style */
+    font-size: 22px; cursor: pointer;
+}
+
+.floating-icon {
+    position: fixed; bottom: 25px; right: 25px;
+    width: 65px; height: 65px;
+    background-color: var(--primary-blue); /* Icon color */
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
