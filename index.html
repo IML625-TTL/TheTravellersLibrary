@@ -92,22 +92,22 @@
 
         <div class="slideshow-container">
 
-            <div class="mySlides fade">
+            <div class="mySlides">
                 <a href="https://www.untourism.int/news/international-tourist-arrivals-up-4-in-2025-reflecting-strong-travel-demand-around-the-world" 
                 target="_blank"><img src="Visuals/UN Tourism News.png" alt="International tourist arrivals up 4% in 2025 reflecting strong travel demand around the world - UN Tourism"
                 title="International tourist arrivals up 4% in 2025 reflecting strong travel demand around the world - UN Tourism"></a>
             </div>
 
-            <div class="mySlides fade">
+            <div class="mySlides">
                 <a href="https://www.tourism-review.com/southeast-asias-tourism-is-mostly-recovered-news15145" target="_blank">
                 <img src="Visuals/Tourism Review News.png" alt="Southeast Asia'S Tourism Industry Renaissance 
                 - Tourism Review" title="Southeast Asia'S Tourism Industry Renaissance - Tourism Review"></a>
             </div>
 
-            <div class="mySlides fade">
+            <div class="mySlides">
                 <a href="https://www.malaymail.com/news/malaysia/2025/12/18/stats-dept-malaysias-domestic-tourism-hits-216-million-visitors-rm884b-spending/202427"
-                target="_blank"><img src="Visuals/Malay Mail News.png" alt="Stats Dept: Malaysia’s domestic tourism hits 216 million visitors, RM88.4b spending 
-                - Malay Mail" title="Stats Dept: Malaysia’s domestic tourism hits 216 million visitors, RM88.4b spending - Malay Mail"></a>
+                target="_blank"><img src="Visuals/Malay Mail News.png" alt="Stats Dept: Malaysia's domestic tourism hits 216 million visitors, RM88.4b spending 
+                - Malay Mail" title="Stats Dept: Malaysia's domestic tourism hits 216 million visitors, RM88.4b spending - Malay Mail"></a>
             </div>
 
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -130,7 +130,7 @@
             </div>
 
             <div class="service-box">
-                <a href="#">
+                <a href="https://fliphtml5.com/bookcase/mrqbd/" target="_blank">
                     <img src="Visuals/E-Resources Logo.png" id="er">
                 </a>
                 <span>E-Resources</span>
@@ -168,19 +168,79 @@
 
 <script>
 let slideIndex = 1;
-showSlides(slideIndex);
+let slideDirection = 1;
+let isAnimating = false;
+showSlides(slideIndex, false);
 
 function plusSlides(n) {
-    showSlides(slideIndex += n);
+    if (isAnimating) return;
+    isAnimating = true;
+    
+    let slides = document.getElementsByClassName("mySlides");
+    let currentSlide = slideIndex - 1;
+    let nextIndex = slideIndex + n;
+    
+    if (nextIndex > slides.length) { nextIndex = 1; }
+    if (nextIndex < 1) { nextIndex = slides.length; }
+    let nextSlide = nextIndex - 1;
+    
+    slideDirection = n;
+    
+    // Animate out current slide
+    if (slideDirection > 0) {
+        slides[currentSlide].classList.add('slide-out-left');
+    } else {
+        slides[currentSlide].classList.add('slide-out-right');
+    }
+    
+    // Show and animate in next slide
+    slides[nextSlide].style.display = "block";
+    if (slideDirection > 0) {
+        slides[nextSlide].classList.add('slide-in-right');
+    } else {
+        slides[nextSlide].classList.add('slide-in-left');
+    }
+    
+    slideIndex = nextIndex;
+    
+    setTimeout(() => {
+        slides[currentSlide].style.display = "none";
+        slides[currentSlide].classList.remove('slide-out-left', 'slide-out-right');
+        slides[nextSlide].classList.remove('slide-in-left', 'slide-in-right');
+        isAnimating = false;
+    }, 600);
 }
 
-function showSlides(n) {
+function showSlides(n, animate = true) {
     let slides = document.getElementsByClassName("mySlides");
     if (n > slides.length) { slideIndex = 1 }
     if (n < 1) { slideIndex = slides.length }
-    for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+    
+    for (let i = 0; i < slides.length; i++) { 
+        slides[i].style.display = "none"; 
+    }
+    
     slides[slideIndex - 1].style.display = "block";
 }
+
+// Intersection Observer for section animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && entry.target.classList.contains('section')) {
+            entry.target.classList.add('animate-in');
+        }
+    });
+}, observerOptions);
+
+// Observe only sections, not navbar or footer
+document.querySelectorAll('.section').forEach(section => {
+    observer.observe(section);
+});
 </script>
 
 </body>

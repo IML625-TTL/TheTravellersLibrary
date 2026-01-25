@@ -8,6 +8,7 @@
 
 body {
     overflow-x: hidden;
+    background-color: #f0e29a;
 }
 
 /* NAVBAR */
@@ -19,6 +20,8 @@ nav {
     width: 100%;
     height: clamp(60px, 10vh, 75px);
     padding: 0 clamp(10px, 2vw, 20px);
+    position: relative;
+    z-index: 100;
 }
 
 .nav-left {
@@ -46,6 +49,11 @@ nav ul.menu {
 
 nav ul.menu li {
     position: relative;
+    border-left: 2px solid rgba(0, 4, 53, 0.2);
+}
+
+nav ul.menu li:first-child {
+    border-left: none;
 }
 
 nav ul.menu li a {
@@ -56,6 +64,7 @@ nav ul.menu li a {
     font-weight: bold;
     white-space: nowrap;
     font-size: clamp(12px, 1.8vw, 16px);
+    cursor: pointer;
 }
 
 nav ul.menu li a:hover {
@@ -73,10 +82,21 @@ nav ul.menu li ul.dropdown {
     list-style: none;
     min-width: 150px;
     z-index: 1000;
+    border: 2px solid rgba(0, 4, 53, 0.2);
+    border-top: none;
 }
 
 nav ul.menu li:hover ul.dropdown {
     display: block;
+}
+
+nav ul.menu li ul.dropdown li {
+    border-left: none;
+    border-bottom: 2px solid rgba(0, 4, 53, 0.2);
+}
+
+nav ul.menu li ul.dropdown li:last-child {
+    border-bottom: none;
 }
 
 nav ul.menu li ul.dropdown li a {
@@ -92,6 +112,84 @@ nav ul.menu li ul.dropdown li a {
     padding: clamp(10px, 2vh, 20px);
 }
 
+/* ANIMATION KEYFRAMES */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-80px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-80px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(80px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 1;
+    }
+}
+
 /* SECTION 1 */
 #section1 {
     height: calc(100vh - clamp(60px, 10vh, 75px));
@@ -102,6 +200,13 @@ nav ul.menu li ul.dropdown li a {
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(-80px);
+}
+
+#section1.animate-in {
+    animation: fadeInDown 1s ease-out forwards;
 }
 
 .hero-content {
@@ -132,6 +237,12 @@ nav ul.menu li ul.dropdown li a {
     position: relative;
     min-height: 100vh;
     height: 100vh;
+    opacity: 0;
+    transform: translateX(-80px);
+}
+
+#section2.animate-in {
+    animation: fadeInRight 1s ease-out forwards;
 }
 
 #h2s2 {
@@ -139,6 +250,16 @@ nav ul.menu li ul.dropdown li a {
     color: black;
     font-size: clamp(28px, 5vw, 50px);
     margin-bottom: clamp(15px, 2vh, 20px);
+    text-shadow: 
+        -2px -2px 0 white,
+        2px -2px 0 white,
+        -2px 2px 0 white,
+        2px 2px 0 white,
+        -3px 0 0 white,
+        3px 0 0 white,
+        0 -3px 0 white,
+        0 3px 0 white;
+    font-weight: bold;
 }
 
 .slideshow-container {
@@ -150,12 +271,32 @@ nav ul.menu li ul.dropdown li a {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .mySlides {
     width: 100%;
     height: 100%;
     display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.mySlides.slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.mySlides.slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+}
+
+.mySlides.slide-out-left {
+    animation: slideOutLeft 0.6s ease-out forwards;
+}
+
+.mySlides.slide-out-right {
+    animation: slideOutRight 0.6s ease-out forwards;
 }
 
 .mySlides img {
@@ -176,6 +317,7 @@ nav ul.menu li ul.dropdown li a {
     font-weight: bold;
     background-color: rgba(0, 0, 0, 0.4);
     user-select: none;
+    z-index: 10;
 }
 
 .prev {
@@ -196,6 +338,12 @@ nav ul.menu li ul.dropdown li a {
     overflow: hidden;
     background-color: #f0e29a;
     padding: clamp(15px, 3vh, 30px) clamp(10px, 2vw, 20px) clamp(10px, 2vh, 20px) clamp(10px, 2vw, 20px);
+    opacity: 0;
+    transform: translateX(80px);
+}
+
+#section3.animate-in {
+    animation: fadeInLeft 1s ease-out forwards;
 }
 
 #h2s3 {
@@ -203,13 +351,23 @@ nav ul.menu li ul.dropdown li a {
     color: black;
     font-size: clamp(28px, 5vw, 50px);
     flex-shrink: 0;
+    text-shadow: 
+        -2px -2px 0 white,
+        2px -2px 0 white,
+        -2px 2px 0 white,
+        2px 2px 0 white,
+        -3px 0 0 white,
+        3px 0 0 white,
+        0 -3px 0 white,
+        0 3px 0 white;
+    font-weight: bold;
 }
 
 /* SERVICE BOXES */
 .services-row {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     gap: clamp(15px, 2vw, 25px);
     width: 100%;
     max-width: 1200px;
@@ -217,12 +375,11 @@ nav ul.menu li ul.dropdown li a {
 
 .service-box {
     flex: 1;
-    max-width: 260px;
-    height: clamp(180px, 30vh, 280px);
-    max-height: 280px;
+    max-width: clamp(200px, 25vw, 260px);
+    height: clamp(200px, 30vh, 300px);
     background-color: #fefcef;
     border: 3px solid #7e212a;
-    border-radius: 15px;
+    border-radius: 50% 50% 15px 15px / 30% 30% 15px 15px;
     padding: clamp(10px, 2vh, 20px);
     display: flex;
     flex-direction: column;
@@ -231,18 +388,18 @@ nav ul.menu li ul.dropdown li a {
     gap: clamp(8px, 1.5vh, 15px);
     font-weight: bold;
     text-align: center;
+    position: relative;
 }
 
 .service-box img {
-    max-width: 80%;
-    height: clamp(80px, 15vh, 120px);
-    max-height: 120px;
+    max-width: 75%;
+    height: clamp(70px, 12vh, 110px);
     object-fit: contain;
     flex-shrink: 0;
 }
 
 .service-box span {
-    font-size: clamp(16px, 2.5vw, 25px);
+    font-size: clamp(14px, 2.2vw, 24px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -273,6 +430,7 @@ footer {
     max-width: 70%;
     line-height: clamp(20px, 3vh, 30px);
     font-size: clamp(10px, 1.5vw, 16px);
+    font-weight: bold;
 }
 
 .footer-right {
@@ -299,17 +457,16 @@ footer {
         justify-content: center;
         gap: clamp(10px, 2vw, 15px);
         overflow-y: auto;
+        align-items: center;
     }
     .service-box {
-        max-width: 45%;
-        min-width: 150px;
-        flex: 0 1 45%;
-        height: clamp(160px, 25vh, 220px);
-        max-height: 220px;
+        max-width: clamp(160px, 40vw, 220px);
+        min-width: 140px;
+        flex: 0 1 40%;
+        height: clamp(170px, 25vh, 240px);
     }
     .service-box img {
-        height: clamp(60px, 12vh, 100px);
-        max-height: 100px;
+        height: clamp(55px, 10vh, 90px);
     }
 }
 
@@ -328,6 +485,11 @@ footer {
     }
     nav ul.menu li {
         width: 100%;
+        border-left: none;
+        border-top: 2px solid rgba(0, 4, 53, 0.2);
+    }
+    nav ul.menu li:first-child {
+        border-top: none;
     }
     nav ul.menu li a {
         padding: 0.6em 1em;
@@ -335,6 +497,7 @@ footer {
     nav ul.menu li ul.dropdown {
         position: static;
         width: 100%;
+        border: none;
     }
     #section1 {
         height: calc(100vh - clamp(100px, 15vh, 120px));
@@ -343,16 +506,15 @@ footer {
         max-width: 100%;
         min-width: 100%;
         flex: 0 1 auto;
-        height: clamp(140px, 20vh, 180px);
-        max-height: 180px;
+        height: clamp(150px, 22vh, 200px);
     }
     .service-box img {
-        height: clamp(50px, 10vh, 80px);
-        max-height: 80px;
+        height: clamp(45px, 9vh, 70px);
     }
     .services-row {
         flex-direction: column;
         gap: clamp(10px, 1.5vh, 15px);
+        align-items: stretch;
     }
     .footer-container {
         flex-direction: column;
@@ -379,11 +541,9 @@ footer {
         margin-bottom: 15px;
     }
     .service-box {
-        height: clamp(140px, 25vh, 180px);
-        max-height: 180px;
+        height: clamp(140px, 24vh, 180px);
     }
     .service-box img {
-        height: clamp(50px, 12vh, 70px);
-        max-height: 70px;
+        height: clamp(40px, 10vh, 65px);
     }
 }

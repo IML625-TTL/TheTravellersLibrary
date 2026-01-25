@@ -1,4 +1,4 @@
-/* 1. Load Font (Fail: DISPLAYED.ttf) */
+/* Load Font */
 @font-face {
     font-family: 'MyCustomFont';
     src: url('DISPLAYED.ttf') format('truetype');
@@ -6,70 +6,166 @@
     font-style: normal;
 }
 
+/* RESET */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: #f0e29a; 
+    overflow-x: hidden;
+    background-color: #f0e29a;
     font-family: 'Times New Roman', Times, serif;
     color: #000;
 }
 
+/* NAVBAR - Using your style */
 nav {
-    background-color: #86cfff; 
-    height: 80px; 
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    position: sticky;
-    top: 0;
+    background-color: #86cfff;
+    width: 100%;
+    height: clamp(50px, 8vh, 75px);
+    padding: 0 clamp(10px, 2vw, 20px);
+    position: relative;
+    z-index: 100;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.logo img {
+    height: clamp(35px, 6vh, 60px);
+    flex-shrink: 0;
+}
+
+.library-name h2 {
+    margin-left: clamp(8px, 1.5vw, 15px);
+    white-space: nowrap;
+    font-size: clamp(10px, 2vw, 24px);
+}
+
+/* Menu */
+nav ul.menu {
+    display: flex;
+    list-style: none;
+}
+
+nav ul.menu li {
+    position: relative;
+    border-left: 2px solid rgba(0, 4, 53, 0.2);
+}
+
+nav ul.menu li:first-child {
+    border-left: none;
+}
+
+nav ul.menu li a {
+    display: block;
+    padding: clamp(0.5em, 0.8vh, 1em) clamp(0.6em, 1.2vw, 1.2em);
+    color: #000435;
+    text-decoration: none;
+    font-weight: bold;
+    white-space: nowrap;
+    font-size: clamp(10px, 1.5vw, 16px);
+    cursor: pointer;
+}
+
+nav ul.menu li a:hover {
+    background-color: #999ae8;
+    color: #ffe870;
+}
+
+/* Dropdown */
+nav ul.menu li ul.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #86cfff;
+    list-style: none;
+    min-width: 150px;
     z-index: 1000;
 }
 
-nav ul {
-    display: flex;
-    height: 100%;
+nav ul.menu li:hover ul.dropdown {
+    display: block;
 }
 
-nav ul li {
-    display: flex;
-    align-items: center;
-    padding: 0 25px;
-    border-right: 2px solid #f0e29a; 
-    height: 100%;
+nav ul.menu li ul.dropdown li {
+    border: 2px solid rgba(0, 4, 53, 0.2);
+    border-bottom: none;
 }
 
-nav ul li:last-child {
-    border-right: none;
+nav ul.menu li ul.dropdown li:first-child {
+    border-top: none;
 }
 
-nav ul li a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 1.1rem;
+nav ul.menu li ul.dropdown li:last-child {
+    border-bottom: 2px solid rgba(0, 4, 53, 0.2);
 }
 
+nav ul.menu li ul.dropdown li a {
+    padding: 0.8em 1em;
+}
+
+/* ANIMATION KEYFRAMES */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-80px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MAIN CONTENT SECTION */
 #contact {
-    padding: 10px 20px 60px 20px; 
+    padding: clamp(15px, 3vh, 30px) clamp(15px, 3vw, 40px);
     max-width: 1200px;
     margin: 0 auto;
+    min-height: calc(100vh - clamp(50px, 8vh, 75px) - clamp(50px, 8vh, 60px));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(-80px);
+}
+
+#contact.animate-in {
+    animation: fadeInDown 1s ease-out forwards;
 }
 
 .main-title {
     font-family: 'MyCustomFont', sans-serif;
-    font-size: 4.5rem;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: clamp(20px, 4vh, 40px);
+    text-shadow: 
+        -2px -2px 0 white,
+        2px -2px 0 white,
+        -2px 2px 0 white,
+        2px 2px 0 white,
+        -3px 0 0 white,
+        3px 0 0 white,
+        0 -3px 0 white,
+        0 3px 0 white;
 }
 
 .contact-container {
     display: flex;
     justify-content: space-between;
-    gap: 80px;
+    gap: clamp(30px, 6vw, 80px);
 }
 
 .contact-info {
@@ -78,26 +174,37 @@ nav ul li a {
 
 .sub-heading {
     font-family: 'MyCustomFont', sans-serif;
-    font-size: 2.2rem;
-    margin-bottom: 25px;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    margin-bottom: clamp(15px, 3vh, 25px);
 }
 
 .description {
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
     line-height: 1.5;
-    margin-bottom: 40px;
+    margin-bottom: clamp(20px, 4vh, 40px);
     text-align: justify;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(15px, 2.5vh, 25px);
 }
 
 .detail-item {
     display: flex;
-    align-items: center;
-    margin-bottom: 25px;
+    align-items: flex-start;
 }
 
 .icon {
-    font-size: 1.8rem;
-    margin-right: 20px;
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    margin-right: clamp(10px, 2vw, 20px);
+    flex-shrink: 0;
+}
+
+.detail-item p {
+    font-size: clamp(0.85rem, 1.4vw, 1rem);
+    line-height: 1.4;
 }
 
 .contact-form {
@@ -109,11 +216,16 @@ nav ul li a {
     width: 100%;
     background: white;
     border: 3px solid black;
-    padding: 15px;
-    margin-bottom: 15px;
+    padding: clamp(10px, 1.5vh, 15px);
+    margin-bottom: clamp(10px, 1.5vh, 15px);
     font-family: 'MyCustomFont', sans-serif;
     color: black;
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+}
+
+.contact-form textarea {
+    min-height: clamp(100px, 15vh, 150px);
+    resize: vertical;
 }
 
 .contact-form input::placeholder, 
@@ -125,35 +237,118 @@ nav ul li a {
     background-color: #86cfff;
     color: white;
     border: none;
-    padding: 12px 40px;
+    padding: clamp(10px, 1.5vh, 12px) clamp(25px, 4vw, 40px);
     border-radius: 35px;
     font-family: 'MyCustomFont', sans-serif;
     cursor: pointer;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    font-weight: bold;
+}
+
+.send-btn:hover {
+    background-color: #6ab5f5;
 }
 
 .security-notice {
-    margin-top: 15px; 
-    font-size: 0.85rem;
+    margin-top: clamp(10px, 2vh, 15px);
+    font-size: clamp(0.7rem, 1.2vw, 0.85rem);
 }
 
+.security-notice a {
+    color: #000;
+    text-decoration: underline;
+}
+
+/* FOOTER - Using your style */
 footer {
     background-color: #86cfff;
-    text-align: center;
-    padding: 25px;
-    margin-top: 60px;
+    color: black;
+    width: 100%;
+    padding: clamp(8px, 1.5vh, 10px) clamp(10px, 2vw, 20px);
+    height: clamp(50px, 8vh, 60px);
+    display: flex;
+    align-items: center;
 }
 
-footer p {
-    color: white; 
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+}
+
+.footer-left {
+    max-width: 70%;
+    line-height: clamp(20px, 3vh, 30px);
+    font-size: clamp(10px, 1.5vw, 16px);
     font-weight: bold;
-    font-size: 0.95rem;
 }
 
+.footer-right {
+    display: flex;
+    align-items: center;
+    gap: clamp(8px, 1.5vw, 12px);
+}
 
+.footer-right img {
+    width: clamp(20px, 3.5vh, 28px);
+    height: clamp(20px, 3.5vh, 28px);
+    object-fit: contain;
+    cursor: pointer;
+}
 
+#footerimg {
+    width: clamp(24px, 4vh, 32px);
+}
 
+/* RESPONSIVE */
+@media screen and (max-width: 900px) {
+    .contact-container {
+        flex-direction: column;
+        gap: clamp(30px, 5vh, 50px);
+    }
+    
+    .contact-info {
+        flex: 1;
+    }
+}
 
-
-
-
-
+@media screen and (max-width: 500px) {
+    nav ul.menu li {
+        border-left: none;
+        border-top: 2px solid rgba(0, 4, 53, 0.2);
+    }
+    nav ul.menu li:first-child {
+        border-top: none;
+    }
+    nav ul.menu li ul.dropdown {
+        position: static;
+        width: 100%;
+    }
+    nav ul.menu li ul.dropdown li {
+        border-left: 2px solid rgba(0, 4, 53, 0.2);
+        border-right: 2px solid rgba(0, 4, 53, 0.2);
+    }
+    
+    .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .footer-left {
+        max-width: 100%;
+    }
+    .footer-right {
+        align-self: flex-start;
+    }
+    footer {
+        height: auto;
+        min-height: clamp(60px, 10vh, 80px);
+    }
+    
+    #contact {
+        min-height: calc(100vh - clamp(50px, 8vh, 75px) - clamp(60px, 10vh, 80px));
+    }
+}
