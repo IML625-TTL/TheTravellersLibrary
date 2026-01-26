@@ -5,9 +5,15 @@
     box-sizing: border-box;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     background-color: #f0e29a;
     font-family: 'Times New Roman', serif;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ========== NAVBAR ========== */
@@ -17,7 +23,9 @@ nav {
     align-items: center;
     background-color: #86cfff;
     height: clamp(60px, 10vh, 75px);
-    padding: 0 20px;
+    padding: 0 25px;
+    position: relative;
+    z-index: 1000;
 }
 
 .nav-left {
@@ -37,6 +45,7 @@ nav {
 .menu {
     list-style: none;
     display: flex;
+    align-items: center;
 }
 
 .menu li {
@@ -44,10 +53,11 @@ nav {
 }
 
 .menu a {
-    padding: 12px 16px;
+    padding: 14px 18px;
     text-decoration: none;
     font-weight: bold;
     color: #000435;
+    display: block;
 }
 
 .menu a:hover {
@@ -55,24 +65,31 @@ nav {
     color: #ffe870;
 }
 
-/* Dropdown */
+/* ========== DROPDOWN (FIXED) ========== */
 .dropdown {
     position: absolute;
     top: 100%;
     left: 0;
-    background: #86cfff;
+    background-color: #86cfff;
+    min-width: 220px;
     list-style: none;
     display: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-.menu li:hover .dropdown {
+.dropdown li a {
+    padding: 12px 16px;
+    white-space: nowrap;
+}
+
+.services:hover .dropdown {
     display: block;
 }
 
 /* ========== MAIN CONTENT ========== */
 .page-content {
-    min-height: calc(100vh - 150px);
-    padding: 50px;
+    flex: 1;
+    padding: 60px;
     text-align: center;
 }
 
@@ -123,19 +140,194 @@ nav {
     cursor: pointer;
 }
 
-/* ========== FOOTER ========== */
+/* ========== FOOTER (FIXED) ========== */
 footer {
     background-color: #86cfff;
-    padding: 15px 20px;
+    padding: 15px 25px;
 }
 
 .footer-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-wrap: wrap;
 }
 
 .footer-right img {
     width: 25px;
     margin-left: 10px;
+}
+
+
+/* =========================
+   CHATBOT (FLOATING WIDGET)
+   ========================= */
+
+/* Floating chat button */
+.floating-icon {
+    position: fixed;
+    bottom: clamp(80px, 10vh, 100px); /* stays above footer */
+    right: clamp(15px, 2vw, 25px);
+    width: 60px;
+    height: 60px;
+    background-color: #86cfff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease;
+}
+
+.floating-icon:hover {
+    transform: scale(1.08);
+}
+
+/* Chat window */
+.chat-card {
+    position: fixed;
+    bottom: clamp(150px, 18vh, 180px);
+    right: clamp(15px, 2vw, 25px);
+    width: 340px;
+    max-height: 480px;
+    background-color: #fefcef;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+}
+
+/* Active (opened) state */
+.chat-card.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Header */
+.chat-card .header {
+    background-color: #86cfff;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    background-color: #999ae8;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.header-info h2 {
+    font-size: 16px;
+    margin: 0;
+    color: #000435;
+}
+
+.header-info p {
+    font-size: 12px;
+    margin: 0;
+    color: #000435;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #000435;
+}
+
+/* Chat body */
+.chat-body {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    background-color: #f0e29a;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Messages */
+.msg {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.msg.bot {
+    background-color: #86cfff;
+    align-self: flex-start;
+}
+
+.msg.user {
+    background-color: #999ae8;
+    color: white;
+    align-self: flex-end;
+}
+
+/* Footer input */
+.chat-card .footer {
+    display: flex;
+    padding: 10px;
+    gap: 8px;
+    background-color: #fefcef;
+    border-top: 2px solid rgba(0, 4, 53, 0.2);
+}
+
+.chat-card input {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 2px solid #7e212a;
+    outline: none;
+}
+
+.send-btn {
+    background-color: #7e212a;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 500px) {
+    .chat-card {
+        width: calc(100% - 30px);
+        right: 15px;
+        bottom: 120px;
+        max-height: 70vh;
+    }
+
+    .floating-icon {
+        right: 15px;
+        bottom: 90px;
+    }
 }

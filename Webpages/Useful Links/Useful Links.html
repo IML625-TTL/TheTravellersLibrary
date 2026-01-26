@@ -16,7 +16,7 @@
     <div class="nav-left">
         <div class="logo">
             <a href="../../index.html" target="_blank">
-                <img src="Index Visuals/Navbar/TXL Logo.jpeg" alt="Tourism X Library Logo">
+                <img src="../../Index Visuals/Navbar/TXL Logo.jpeg" alt="Tourism X Library Logo">
             </a>
         </div>
         <div class="library-name">
@@ -27,8 +27,9 @@
     <ul class="menu">
         <li><a href="../../index.html" target="_blank">Home</a></li>
         <li><a href="../IML625 GP Website/About us.html" target="_blank">Profile</a></li>
-        <li>
-            <a>Services &#9662;</a>
+
+        <li class="services">
+            <a href="#">Services &#9662;</a>
             <ul class="dropdown">
                 <li><a href="http://10.39.111.43:8081" target="_blank">OPAC</a></li>
                 <li><a href="https://fliphtml5.com/bookcase/mrqbd/" target="_blank">E-Resources</a></li>
@@ -36,7 +37,8 @@
                 <li><a href="../Useful Links/Useful Links.html">Useful Links</a></li>
             </ul>
         </li>
-        <li><a href="Contact Us.html" target="_blank">Contact Us</a></li>
+
+        <li><a href="../Contact Us/Contact Us.html" target="_blank">Contact Us</a></li>
     </ul>
 </nav>
 
@@ -72,9 +74,7 @@
     </div>
 </div>
 
-<div class="floating-icon" onclick="toggleChat()">
-    💬
-</div>
+<div class="floating-icon" onclick="toggleChat()">💬</div>
 
 <!-- ================= FOOTER ================= -->
 <footer>
@@ -82,12 +82,14 @@
         <div class="footer-left">
             © Tourism X Library, 2025. Group project under IML625.
         </div>
+
         <div class="footer-right">
-            <img src="Index Visuals/Footer/SocMed Logo/Facebook Logo.png" alt="Facebook">
-            <img src="Index Visuals/Footer/SocMed Logo/Instagram Logo.jfif" alt="Instagram">
-            <img src="Index Visuals/Footer/SocMed Logo/X Logo.png" alt="X">
-            <img src="Index Visuals/Footer/SocMed Logo/TikTok Logo.png" alt="TikTok">
-            <img src="Index Visuals/Footer/Top Arrow.webp" alt="Back to top">
+            <a href="#"><img src="../../Index Visuals/Footer/SocMed Logo/Facebook Logo.png" alt="Facebook"></a>
+            <a href="#"><img src="../../Index Visuals/Footer/SocMed Logo/Instagram Logo.jfif" alt="Instagram"></a>
+            <a href="#"><img src="../../Index Visuals/Footer/SocMed Logo/X Logo.png" alt="X"></a>
+            <a href="#"><img src="../../Index Visuals/Footer/SocMed Logo/TikTok Logo.png" alt="TikTok"></a>
+            <a href="#"><img src="../../Index Visuals/Footer/SocMed Logo/LinkedIn Logo.png" alt="LinkedIn"></a>
+            <a href="#"><img src="../../Index Visuals/Footer/Top Arrow.webp" id="footerimg" alt="Back to top"></a>
         </div>
     </div>
 </footer>
@@ -97,8 +99,7 @@
 const API_KEY = "PASTE_YOUR_API_KEY_HERE";
 
 function toggleChat() {
-    const chat = document.getElementById("chatWindow");
-    chat.classList.toggle("active");
+    document.getElementById("chatWindow").classList.toggle("active");
 }
 
 async function sendMessage() {
