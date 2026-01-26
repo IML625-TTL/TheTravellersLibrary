@@ -72,9 +72,9 @@ nav ul.menu li a:hover {
     color: #ffe870;
 }
 
-/* Dropdown */
+/* Dropdown with smooth animation */
 nav ul.menu li ul.dropdown {
-    display: none;
+    display: block;
     position: absolute;
     top: 100%;
     left: 0;
@@ -84,10 +84,15 @@ nav ul.menu li ul.dropdown {
     z-index: 1000;
     border: 2px solid rgba(0, 4, 53, 0.2);
     border-top: none;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
 }
 
 nav ul.menu li:hover ul.dropdown {
-    display: block;
+    max-height: 500px;
+    opacity: 1;
 }
 
 nav ul.menu li ul.dropdown li {
@@ -231,6 +236,26 @@ nav ul.menu li ul.dropdown li a {
     font-weight: bold;
 }
 
+/* (Keep all existing CSS from index.css, and add this at the end) */
+
+/* Google Custom Search Styling */
+.gcse-search-container {
+    max-width: 600px;
+    margin: 30px auto 0;
+    padding: 0 20px;
+}
+
+/* Customize Google Search appearance */
+.gsc-control-cse {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.gsc-input-box {
+    border-radius: 20px !important;
+    background-color: white !important;
+}
+
 /* SECTION 2 */
 #section2 {
     background-color: #86cfff;
@@ -284,19 +309,19 @@ nav ul.menu li ul.dropdown li a {
 }
 
 .mySlides.slide-in-left {
-    animation: slideInLeft 0.6s ease-out forwards;
+    animation: slideInLeft 1.5s ease-in-out forwards;
 }
 
 .mySlides.slide-in-right {
-    animation: slideInRight 0.6s ease-out forwards;
+    animation: slideInRight 1.5s ease-in-out forwards;
 }
 
 .mySlides.slide-out-left {
-    animation: slideOutLeft 0.6s ease-out forwards;
+    animation: slideOutLeft 1.5s ease-in-out forwards;
 }
 
 .mySlides.slide-out-right {
-    animation: slideOutRight 0.6s ease-out forwards;
+    animation: slideOutRight 1.5s ease-in-out forwards;
 }
 
 .mySlides img {

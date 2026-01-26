@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tourism X Library - Guiding Pathways to Tourism Knowledge</title>
     <link rel="stylesheet" href="index.css">
+    <script async src="https://cse.google.com/cse.js?cx=a7e5a31ac0958433a"></script>
 </head>
 
 <body>
@@ -25,8 +26,8 @@
 
         <ul class="menu">
             <li><a href="index.html">Home</a></li>
-            <li>
-                <a>Services &#9662;</a>
+            <li class="services-dropdown">
+                <a href="#">Services &#9662;</a>
                 <ul class="dropdown">
                     <li><a href="http://10.39.111.43:8081" target="_blank">Koha</a></li>
                     <li><a href="https://fliphtml5.com/bookcase/mrqbd/" target="_blank">E-Resources</a></li>
@@ -44,10 +45,10 @@
             <svg viewBox="0 0 500 240" width="100%" height="100%">
 
                 <!-- Main curve -->
-                <path id="curve-main" d="M10,140 Q250,50 490,140" fill="transparent" />
+                <path id="curve-main" d="M10,140 Q250,50 490,140" fill="transparent"></path>
 
                 <!-- Sub curve -->
-                <path id="curve-sub" d="M30,160 Q250,90 470,160" fill="transparent" />
+                <path id="curve-sub" d="M30,160 Q250,90 470,160" fill="transparent"></path>
 
                 <!-- Main text with white stroke -->
                 <text font-family="Arial" font-size="28" stroke="white" stroke-width="6" fill="none" font-weight="bold">
@@ -73,15 +74,25 @@
                     </textPath>
                 </text>
 
-                <!-- Search bar -->
-                <rect x="110" y="180" width="280" height="30" rx="15" ry="15" fill="#f2f2f2" stroke="#ccc" />
-
-                <!-- Magnifying glass -->
-                <rect x="395" y="180" width="30" height="30" rx="15" ry="15" fill="#d9d9d9" />
-                <circle cx="410" cy="195" r="5" stroke="#555" stroke-width="1.5" fill="none" />
-                <line x1="413" y1="198" x2="417" y2="202" stroke="#555" stroke-width="1.5" />
+                <!-- Functional Search bar -->
+                <foreignObject x="110" y="180" width="315" height="30">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: center; height: 100%;">
+                        <input type="text" id="searchInput" placeholder="Search services..." style="width: 280px; height: 30px; border: 1px solid #ccc; border-radius: 15px; padding: 0 15px; font-size: 14px; outline: none;" />
+                        <button type="button" onclick="performSearch()" style="width: 30px; height: 30px; border: none; border-radius: 15px; background-color: #d9d9d9; cursor: pointer; margin-left: 5px; display: flex; align-items: center; justify-content: center;">
+                            <svg width="15" height="15" viewBox="0 0 15 15">
+                                <circle cx="6" cy="6" r="4" stroke="#555" stroke-width="1.5" fill="none"></circle>
+                                <line x1="8.5" y1="8.5" x2="12" y2="12" stroke="#555" stroke-width="1.5"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </foreignObject>
 
             </svg>
+        </div>
+        
+        <!-- Google Custom Search Engine -->
+        <div class="gcse-search-container">
+            <div class="gcse-search"></div>
         </div>
     </section>
 
@@ -95,19 +106,17 @@
             <div class="mySlides">
                 <a href="https://www.untourism.int/news/international-tourist-arrivals-up-4-in-2025-reflecting-strong-travel-demand-around-the-world" 
                 target="_blank"><img src="Visuals/UN Tourism News.png" alt="International tourist arrivals up 4% in 2025 reflecting strong travel demand around the world - UN Tourism"
-                title="International tourist arrivals up 4% in 2025 reflecting strong travel demand around the world - UN Tourism"></a>
+                title="International tourist arrivals up 4% in 2025 reflecting strong travel demand around the world - UN Tourism" /></a>
             </div>
 
             <div class="mySlides">
                 <a href="https://www.tourism-review.com/southeast-asias-tourism-is-mostly-recovered-news15145" target="_blank">
-                <img src="Visuals/Tourism Review News.png" alt="Southeast Asia'S Tourism Industry Renaissance 
-                - Tourism Review" title="Southeast Asia'S Tourism Industry Renaissance - Tourism Review"></a>
+                <img src="Visuals/Tourism Review News.png" alt="Southeast Asia'S Tourism Industry Renaissance - Tourism Review" title="Southeast Asia'S Tourism Industry Renaissance - Tourism Review" /></a>
             </div>
 
             <div class="mySlides">
                 <a href="https://www.malaymail.com/news/malaysia/2025/12/18/stats-dept-malaysias-domestic-tourism-hits-216-million-visitors-rm884b-spending/202427"
-                target="_blank"><img src="Visuals/Malay Mail News.png" alt="Stats Dept: Malaysia's domestic tourism hits 216 million visitors, RM88.4b spending 
-                - Malay Mail" title="Stats Dept: Malaysia's domestic tourism hits 216 million visitors, RM88.4b spending - Malay Mail"></a>
+                target="_blank"><img src="Visuals/Malay Mail News.png" alt="Stats Dept: Malaysia's domestic tourism hits 216 million visitors, RM88.4b spending - Malay Mail" title="Stats Dept: Malaysia's domestic tourism hits 216 million visitors, RM88.4b spending - Malay Mail" /></a>
             </div>
 
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -124,21 +133,21 @@
 
             <div class="service-box">
                 <a href="http://10.39.111.43:8081" target="_blank">
-                    <img src="Visuals/Koha Logo.png" id="koha">
+                    <img src="Visuals/Koha Logo.png" id="koha" alt="Koha" />
                 </a>
                 <span>Koha</span>
             </div>
 
             <div class="service-box">
                 <a href="https://fliphtml5.com/bookcase/mrqbd/" target="_blank">
-                    <img src="Visuals/E-Resources Logo.png" id="er">
+                    <img src="Visuals/E-Resources Logo.png" id="er" alt="E-Resources" />
                 </a>
                 <span>E-Resources</span>
             </div>
 
             <div class="service-box">
                 <a href="http://10.39.111.122" target="_blank">
-                    <img src="Visuals/Institutional Repository Logo.png" id="ir">
+                    <img src="Visuals/Institutional Repository Logo.png" id="ir" alt="Institutional Repository" />
                 </a>
                 <span>Institutional Repository</span>
             </div>
@@ -155,18 +164,61 @@
             </div>
 
             <div class="footer-right">
-                <a href="#"><img src="SMP Pic/Facebook Logo.png" alt="Facebook"></a>
-                <a href="#"><img src="SMP Pic/Instagram Logo.jfif" alt="Instagram"></a>
-                <a href="#"><img src="SMP Pic/X Logo.png" alt="X"></a>
-                <a href="#"><img src="SMP Pic/TikTok Logo.png" alt="TikTok"></a>
-                <a href="#"><img src="SMP Pic/LinkedIn Logo.png" alt="LinkedIn"></a>
-                <a href="#navbar"><img src="Visuals/Top Arrow.webp" id="footerimg" alt="Back to top"></a>
+                <a href="#"><img src="SMP Pic/Facebook Logo.png" alt="Facebook" /></a>
+                <a href="#"><img src="SMP Pic/Instagram Logo.jfif" alt="Instagram" /></a>
+                <a href="#"><img src="SMP Pic/X Logo.png" alt="X" /></a>
+                <a href="#"><img src="SMP Pic/TikTok Logo.png" alt="TikTok" /></a>
+                <a href="#"><img src="SMP Pic/LinkedIn Logo.png" alt="LinkedIn" /></a>
+                <a href="#navbar"><img src="Visuals/Top Arrow.webp" id="footerimg" alt="Back to top" /></a>
             </div>
 
         </div>
     </footer>
 
 <script>
+// Search functionality
+function performSearch() {
+    const searchInput = document.getElementById('searchInput').value.toLowerCase().trim();
+    
+    // Define service keywords and their URLs
+    const services = {
+        'koha': 'http://10.39.111.43:8081',
+        'e-resources': 'https://fliphtml5.com/bookcase/mrqbd/',
+        'eresources': 'https://fliphtml5.com/bookcase/mrqbd/',
+        'e resources': 'https://fliphtml5.com/bookcase/mrqbd/',
+        'institutional repository': 'http://10.39.111.122',
+        'repository': 'http://10.39.111.122'
+    };
+    
+    // Check if search input matches any service
+    for (let key in services) {
+        if (searchInput.includes(key)) {
+            window.open(services[key], '_blank');
+            return;
+        }
+    }
+    
+    // If no match, open all services or show alert
+    if (searchInput === '') {
+        alert('Please enter a search term (e.g., Koha, E-Resources, Repository)');
+    } else {
+        alert('Service not found. Available services: Koha, E-Resources, Institutional Repository');
+    }
+}
+
+// Allow Enter key to trigger search
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    }
+});
+
+// Slideshow functionality
 let slideIndex = 1;
 let slideDirection = 1;
 let isAnimating = false;
@@ -208,7 +260,7 @@ function plusSlides(n) {
         slides[currentSlide].classList.remove('slide-out-left', 'slide-out-right');
         slides[nextSlide].classList.remove('slide-in-left', 'slide-in-right');
         isAnimating = false;
-    }, 600);
+    }, 1500);
 }
 
 function showSlides(n, animate = true) {
