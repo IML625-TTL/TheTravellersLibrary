@@ -235,7 +235,7 @@ nav ul.menu li ul.dropdown li a {
 
 .send-btn {
     background-color: #86cfff;
-    color: white;
+    color: black;
     border: none;
     padding: clamp(10px, 1.5vh, 12px) clamp(25px, 4vw, 40px);
     border-radius: 35px;
