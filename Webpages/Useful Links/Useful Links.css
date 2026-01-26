@@ -1,0 +1,141 @@
+/* ========== RESET ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f0e29a;
+    font-family: 'Times New Roman', serif;
+}
+
+/* ========== NAVBAR ========== */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #86cfff;
+    height: clamp(60px, 10vh, 75px);
+    padding: 0 20px;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 55px;
+}
+
+.library-name h2 {
+    margin-left: 15px;
+    font-size: 22px;
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu a {
+    padding: 12px 16px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #000435;
+}
+
+.menu a:hover {
+    background-color: #999ae8;
+    color: #ffe870;
+}
+
+/* Dropdown */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #86cfff;
+    list-style: none;
+    display: none;
+}
+
+.menu li:hover .dropdown {
+    display: block;
+}
+
+/* ========== MAIN CONTENT ========== */
+.page-content {
+    min-height: calc(100vh - 150px);
+    padding: 50px;
+    text-align: center;
+}
+
+/* ========== CHATBOT ========== */
+.chat-card {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 320px;
+    background: white;
+    border-radius: 15px;
+    display: none;
+    flex-direction: column;
+    z-index: 999;
+}
+
+.chat-card.active {
+    display: flex;
+}
+
+.chat-card .header {
+    background: #86cfff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat-body {
+    padding: 10px;
+    height: 250px;
+    overflow-y: auto;
+}
+
+.msg {
+    margin-bottom: 8px;
+}
+
+.msg.user {
+    text-align: right;
+    font-weight: bold;
+}
+
+.floating-icon {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* ========== FOOTER ========== */
+footer {
+    background-color: #86cfff;
+    padding: 15px 20px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-right img {
+    width: 25px;
+    margin-left: 10px;
+}

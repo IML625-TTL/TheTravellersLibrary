@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Useful Links - Tourism X Library</title>
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="Useful Links.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<nav>
+    <div class="nav-left">
+        <div class="logo">
+            <a href="../../index.html" target="_blank">
+                <img src="Index Visuals/Navbar/TXL Logo.jpeg" alt="Tourism X Library Logo">
+            </a>
+        </div>
+        <div class="library-name">
+            <h2>TOURISM X LIBRARY</h2>
+        </div>
+    </div>
+
+    <ul class="menu">
+        <li><a href="../../index.html" target="_blank">Home</a></li>
+        <li><a href="../IML625 GP Website/About us.html" target="_blank">Profile</a></li>
+        <li>
+            <a>Services &#9662;</a>
+            <ul class="dropdown">
+                <li><a href="http://10.39.111.43:8081" target="_blank">OPAC</a></li>
+                <li><a href="https://fliphtml5.com/bookcase/mrqbd/" target="_blank">E-Resources</a></li>
+                <li><a href="http://10.39.111.122" target="_blank">Institutional Repository</a></li>
+                <li><a href="../Useful Links/Useful Links.html">Useful Links</a></li>
+            </ul>
+        </li>
+        <li><a href="Contact Us.html" target="_blank">Contact Us</a></li>
+    </ul>
+</nav>
+
+<!-- ================= MAIN CONTENT ================= -->
+<main class="page-content">
+    <h1>NEW PAGE TITLE</h1>
+    <p>
+        This is your new page content area.
+        You can add sections, cards, accordions, or anything here.
+    </p>
+</main>
+
+<!-- ================= CHATBOT ================= -->
+<div class="chat-card" id="chatWindow" aria-hidden="true">
+    <div class="header">
+        <div class="header-content">
+            <div class="avatar">🤖</div>
+            <div class="header-info">
+                <h2>Chat Support</h2>
+                <p>Hi, my name is Sam. How can I help you?</p>
+            </div>
+        </div>
+        <button class="close-btn" onclick="toggleChat()">×</button>
+    </div>
+
+    <div class="chat-body" id="chatBody">
+        <div class="msg bot">Hello! I'm your AI assistant.</div>
+    </div>
+
+    <div class="footer">
+        <input type="text" id="userInput" placeholder="Type a message...">
+        <button class="send-btn" onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<div class="floating-icon" onclick="toggleChat()">
+    💬
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-left">
+            © Tourism X Library, 2025. Group project under IML625.
+        </div>
+        <div class="footer-right">
+            <img src="Index Visuals/Footer/SocMed Logo/Facebook Logo.png" alt="Facebook">
+            <img src="Index Visuals/Footer/SocMed Logo/Instagram Logo.jfif" alt="Instagram">
+            <img src="Index Visuals/Footer/SocMed Logo/X Logo.png" alt="X">
+            <img src="Index Visuals/Footer/SocMed Logo/TikTok Logo.png" alt="TikTok">
+            <img src="Index Visuals/Footer/Top Arrow.webp" alt="Back to top">
+        </div>
+    </div>
+</footer>
+
+<!-- ================= CHATBOT SCRIPT ================= -->
+<script>
+const API_KEY = "PASTE_YOUR_API_KEY_HERE";
+
+function toggleChat() {
+    const chat = document.getElementById("chatWindow");
+    chat.classList.toggle("active");
+}
+
+async function sendMessage() {
+    const input = document.getElementById("userInput");
+    const chatBody = document.getElementById("chatBody");
+    const text = input.value.trim();
+    if (!text) return;
+
+    chatBody.innerHTML += `<div class="msg user">${text}</div>`;
+    input.value = "";
+
+    const botMsg = document.createElement("div");
+    botMsg.className = "msg bot";
+    botMsg.textContent = "Typing...";
+    chatBody.appendChild(botMsg);
+
+    try {
+        const res = await fetch(
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text }] }]
+                })
+            }
+        );
+
+        const data = await res.json();
+        botMsg.textContent =
+            data.candidates?.[0]?.content?.parts?.[0]?.text ||
+            "Sorry, I couldn't respond.";
+    } catch {
+        botMsg.textContent = "Connection error.";
+    }
+
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+</script>
+
+</body>
+</html>
