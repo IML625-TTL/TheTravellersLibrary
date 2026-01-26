@@ -11,66 +11,86 @@
 
 <!-- NAVBAR -->
 <nav id="navbar">
-    <div class="logo" style="margin-left: 2%;">
-        <a href="../../index.html">
-            <img src="../../Index Visuals/Navbar/TXL Logo.jpeg" alt="Logo">
-        </a>
+    <div class="nav-left">
+        <div class="logo">
+            <a href="../../index.html">
+                <img src="../../Index Visuals/Navbar/TXL Logo.jpeg" alt="Logo">
+            </a>
+        </div>
+        <div class="library-name">
+            <h2>TOURISM X LIBRARY</h2>
+        </div>
     </div>
+
     <ul class="menu">
         <li><a href="../../index.html">Home</a></li>
-        <li>
+
+        <li class="services-dropdown">
             <a href="#">Services &#9662;</a>
             <ul class="dropdown">
-                <li><a href="http://10.39.111.43:8081">OPAC</a></li>
-                <li><a href="https://fliphtml5.com/bookcase/mrqbd/">E-Resources</a></li>
-                <li><a href="http://10.39.111.122">Institutional Repository</a></li>
+                <li><a href="http://10.39.111.43:8081" target="_blank">Koha</a></li>
+                <li><a href="https://fliphtml5.com/bookcase/mrqbd/" target="_blank">E-Resources</a></li>
+                <li><a href="http://10.39.111.122" target="_blank">Institutional Repository</a></li>
             </ul>
         </li>
+
         <li><a href="../IML625 GP Website/About us.html">About Us</a></li>
-        <li><a href="../Contact Us/Contact Us.html">Contact</a></li>
+        <li><a href="../Contact Us/Contact Us.html">Contact Us</a></li>
     </ul>
 </nav>
+
 
 <!-- ABOUT US -->
 <section class="about-us-section">
 <div class="container">
 
-<h2>About Us</h2>
+<section id="about-us" class="section">
+    <h2 class="section-title">About Us</h2>
 
-<div class="about-content">
-    <div class="about-box">
-        <h3>Who We Are</h3>
-        <p>
-            Unity Space Library is an innovative digital portal dedicated to fostering a safe,
-            inclusive, and supportive environment for students and the community.
-        </p>
+    <!-- Accordion 1: Who We Are -->
+    <div class="accordion-container">
+        <button class="accordion">Who We Are <span class="arrow">&#9662;</span></button>
+        <div class="accordion-content">
+            <p>
+                Tourism X Library is a specialized digital information portal designed to support learning, research, and awareness in the field of tourism. The library focuses on both local and international tourism, providing access to curated resources that highlight tourism development, industry trends, cultural heritage, and sustainable practices. It serves as a knowledge hub for students, educators, and the wider community with an interest in tourism studies.
+            </p>
+        </div>
     </div>
 
-    <div class="about-box">
-        <h3>Vision</h3>
-        <p>
-            We envision a world where educational spaces are free from bullying and every
-            individual feels valued and supported.
-        </p>
+    <!-- Accordion 2: Vision -->
+    <div class="accordion-container">
+        <button class="accordion">Vision <span class="arrow">&#9662;</span></button>
+        <div class="accordion-content">
+            <p>
+                To become a trusted digital tourism information hub that connects users to reliable, comprehensive, and up-to-date tourism knowledge at both local and global levels.
+            </p>
+        </div>
     </div>
 
-    <div class="about-box">
-        <h3>Mission</h3>
-        <p>
-            To provide accessible, accurate, and engaging resources that empower students
-            to prevent and address bullying.
-        </p>
+    <!-- Accordion 3: Mission -->
+    <div class="accordion-container">
+        <button class="accordion">Mission <span class="arrow">&#9662;</span></button>
+        <div class="accordion-content">
+            <p>
+                To provide accessible and well-organized tourism-related information resources through digital platforms, supporting academic learning, research activities, and informed understanding of the tourism industry.
+            </p>
+        </div>
     </div>
 
-    <div class="about-box">
-        <h3>Objectives</h3>
-        <ul>
-            <li>Provide comprehensive educational resources.</li>
-            <li>Promote empathy and respect.</li>
-            <li>Encourage collaboration and feedback.</li>
-        </ul>
+    <!-- Accordion 4: Objectives -->
+    <div class="accordion-container">
+        <button class="accordion">Objectives <span class="arrow">&#9662;</span></button>
+        <div class="accordion-content">
+            <ul>
+                <li>Provide comprehensive access to tourism information through OPAC, e-resources, and institutional repository.</li>
+                <li>Support learning and research in tourism studies with credible, relevant sources.</li>
+                <li>Promote awareness of local and international tourism developments, trends, and best practices.</li>
+                <li>Encourage information literacy and effective use of digital library services among users.</li>
+            </ul>
+        </div>
     </div>
-</div>
+</section>
+
 
 <h2 class="team-title">Our Team</h2>
 
@@ -162,6 +182,55 @@
 
 </div>
 </section>
+
+<footer>
+    <div class="footer-container">
+
+        <div class="footer-left">
+            © Tourism Library, 2025. This library portal is to complete a group project under IML625.
+        </div>
+
+        <div class="footer-right">
+            <a href="#"><img src="../../Index Visuals/Footer/SocMed Logo/Facebook Logo.png" alt="Facebook"></a>
+            <a href="#"><img src="../../Index Visuals/Footer/SocMed Logo/Instagram Logo.jfif" alt="Instagram"></a>
+            <a href="#"><img src="../../Index Visuals/Footer/SocMed Logo/X Logo.png" alt="X"></a>
+            <a href="#"><img src="../../Index Visuals/Footer/SocMed Logo/TikTok Logo.png" alt="TikTok"></a>
+            <a href="#"><img src="../../Index Visuals/Footer/SocMed Logo/LinkedIn Logo.png" alt="LinkedIn"></a>
+            <a href="#navbar">
+                <img src="../../Index Visuals/Footer/Top Arrow.webp" id="footerimg" alt="Back to top">
+            </a>
+        </div>
+
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const accordions = document.querySelectorAll('.accordion');
+
+    accordions.forEach(acc => {
+        acc.addEventListener('click', () => {
+            const content = acc.nextElementSibling;
+            const arrow = acc.querySelector('.arrow');
+
+            if (content.style.maxHeight) {
+                // Close accordion
+                content.style.maxHeight = null;
+                content.style.paddingTop = '0';
+                content.style.paddingBottom = '0';
+                arrow.innerHTML = '&#9662;'; // down arrow
+            } else {
+                // Open accordion
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.style.paddingTop = '10px';
+                content.style.paddingBottom = '10px';
+                arrow.innerHTML = '&#9652;'; // up arrow
+            }
+        });
+    });
+});
+</script>
+
 
 </body>
 </html>
