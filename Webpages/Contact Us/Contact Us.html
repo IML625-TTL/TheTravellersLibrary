@@ -64,15 +64,16 @@
             </div>
 
             <div class="contact-form">
-                <form action="#">
-                    <input type="text" placeholder="NAME" required>
-                    <input type="email" placeholder="EMAIL" required>
-                    <input type="tel" placeholder="PHONE NUMBER" required>
-                    <textarea placeholder="TYPE YOUR MESSAGE" required></textarea>
+                <form id="googleForm" action="https://docs.google.com/forms/d/e/1FAIpQLSetnsY4SaywDGp6OxmHf-BYksTP8O4ho4nUr3DwMKx2pEeOaQ/formResponse">
+                    <input type="text" name="entry.1829287987=l&" placeholder="NAME" required>
+                    <input type="email" name="entry.128281353=l&" placeholder="EMAIL" required>
+                    <input type="tel" name="entry.1858354903=l&" placeholder="PHONE NUMBER" required>
+                    <textarea placeholder="TYPE YOUR MESSAGE" name="entry.320568649=l" required></textarea>
                     
                     <button type="submit" class="send-btn">SEND MESSAGE</button>
                 </form>
                 
+
                 <div class="security-notice">
                     <p>This site is protected by reCAPTCHA and the Google <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a> apply.</p>
                 </div>
@@ -121,6 +122,23 @@
             document.querySelector('.main-section').classList.add('animate-in');
         });
     </script>
+    <script>
+document.getElementById('googleForm').addEventListener('submit', function(e){
+    e.preventDefault(); // Prevent default form submission
+    const form = e.target;
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        mode: 'no-cors' // Google Forms only allows no-cors submissions
+    }).then(() => {
+        alert('Your message has been sent successfully!');
+        form.reset();
+    }).catch(() => {
+        alert('There was an error sending your message.');
+    });
+});
+</script>
+
 
 </body>
 </html>
