@@ -11,7 +11,9 @@ body {
     background-color: #f0e29a;
 }
 
-/* NAVBAR */
+/* =========================
+   NAVBAR
+========================= */
 nav {
     display: flex;
     justify-content: space-between;
@@ -39,7 +41,114 @@ nav {
     margin-left: clamp(8px, 1.5vw, 15px);
     white-space: nowrap;
     font-size: clamp(12px, 2.5vw, 24px);
+    color: #000435;
+    font-weight: bold;
 }
+
+/* Menu */
+nav ul.menu {
+    display: flex;
+    list-style: none;
+}
+
+nav ul.menu li {
+    position: relative;
+    border-left: 2px solid rgba(0, 4, 53, 0.2);
+}
+
+nav ul.menu li:first-child {
+    border-left: none;
+}
+
+nav ul.menu li a {
+    display: block;
+    padding: clamp(0.6em, 1vh, 1em) clamp(0.8em, 1.5vw, 1.2em);
+    color: #000435;
+    text-decoration: none;
+    font-weight: bold;
+    white-space: nowrap;
+    font-size: clamp(12px, 1.8vw, 16px);
+    cursor: pointer;
+}
+
+nav ul.menu li a:hover {
+    background-color: #999ae8;
+    color: #ffe870;
+}
+
+/* Dropdown menu */
+nav ul.menu li ul.dropdown {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #86cfff;
+    list-style: none;
+    min-width: 180px;
+    z-index: 1000;
+    border: 2px solid rgba(0, 4, 53, 0.2);
+    border-top: none;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+nav ul.menu li:hover ul.dropdown {
+    max-height: 500px;
+    opacity: 1;
+}
+
+nav ul.menu li ul.dropdown li {
+    border-left: none;
+    border-bottom: 2px solid rgba(0, 4, 53, 0.2);
+}
+
+nav ul.menu li ul.dropdown li:last-child {
+    border-bottom: none;
+}
+
+nav ul.menu li ul.dropdown li a {
+    padding: 0.8em 1em;
+}
+
+/* RESPONSIVE NAVBAR */
+@media screen and (max-width: 900px) {
+    nav ul.menu {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    nav ul.menu li {
+        width: 100%;
+        border-left: none;
+        border-top: 2px solid rgba(0, 4, 53, 0.2);
+    }
+
+    nav ul.menu li:first-child {
+        border-top: none;
+    }
+
+    nav ul.menu li ul.dropdown {
+        position: static;
+        width: 100%;
+        border: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    nav {
+        flex-wrap: wrap;
+        height: auto;
+        min-height: clamp(100px, 15vh, 120px);
+    }
+
+    .library-name h2 {
+        margin-left: clamp(5px, 1vw, 10px);
+    }
+}
+
 
 /* Menu */
 nav ul.menu {
