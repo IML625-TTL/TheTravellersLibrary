@@ -200,7 +200,7 @@ nav ul.menu li ul.dropdown li a {
     height: calc(100vh - clamp(60px, 10vh, 75px));
     overflow: hidden;
     background-color: #f0e29a;
-    background-image: url();
+    background-image: url(Section\ 1\ BG.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
