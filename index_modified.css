@@ -359,7 +359,7 @@ nav ul.menu li ul.dropdown li a {
     min-height: 450px;
     height: 450px;
     padding: 30px 20px;
-    background-image: linear-gradient(to right, #f0e29a, #b3d9f2);
+    background-color: #86cfff;
     gap: 20px;
     opacity: 0;
     transform: translateX(-80px);
@@ -488,7 +488,7 @@ nav ul.menu li ul.dropdown li a {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    background-color: #b3d9f2;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .mySlides {
