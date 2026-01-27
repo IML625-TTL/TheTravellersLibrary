@@ -125,8 +125,88 @@ nav ul.menu li ul.dropdown li a {
 /* ========== MAIN CONTENT ========== */
 .page-content {
     flex: 1;
-    padding: 60px;
-    text-align: center;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page-content h1 {
+    font-size: clamp(24px, 4vw, 36px);
+    margin-bottom: 30px;
+    color: #000435;
+}
+
+/* ========== LINKS CONTAINER ========== */
+.links-container {
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Individual Link Card */
+.link-card {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.link-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-color: #86cfff;
+    background-color: #fefcef;
+}
+
+/* Logo Section (Narrow - Left Side) */
+.link-logo {
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    background-color: #f0e29a;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.link-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Content Section (Wide - Right Side) */
+.link-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.link-content h3 {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: #000435;
+    margin: 0;
+    font-weight: bold;
+}
+
+.link-content p {
+    font-size: clamp(13px, 1.8vw, 15px);
+    color: #333;
+    margin: 0;
+    line-height: 1.5;
 }
 
 /* ========== CHATBOT ========== */
@@ -354,6 +434,30 @@ footer {
 }
 
 /* Mobile adjustments */
+@media screen and (max-width: 768px) {
+    .links-container {
+        width: 95%;
+    }
+
+    .link-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .link-logo {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .link-content h3 {
+        font-size: 18px;
+    }
+
+    .link-content p {
+        font-size: 14px;
+    }
+}
+
 @media screen and (max-width: 500px) {
     .chat-card {
         width: calc(100% - 30px);
