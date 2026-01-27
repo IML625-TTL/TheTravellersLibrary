@@ -76,16 +76,44 @@
                     </textPath>
                 </text>
 
-                <!-- Functional Search bar -->
-                <foreignObject x="110" y="180" width="315" height="30">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: 
-                    center; height: 100%;">
-                        <input type="text" id="searchInput" placeholder="Search services..." 
-                        style="width: 280px; height: 30px; border: 1px solid #ccc; border-radius: 15px; 
+                <!-- Functional Search bar with dropdown -->
+                <foreignObject x="90" y="180" width="355" height="30">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: center; height: 100%;">
+                        <input type="text" id="searchInput" placeholder="Search in OPAC..." 
+                        style="width: 200px; height: 30px; border: 1px solid #ccc; border-radius: 15px 0 0 15px; 
                         padding: 0 15px; font-size: 14px; outline: none;" />
+                        
+                        <div class="search-dropdown-container" style="position: relative;">
+                            <button type="button" id="dropdownBtn" onclick="toggleSearchDropdown()" 
+                            style="width: 110px; height: 30px; border: 1px solid #ccc; border-left: none; 
+                            background-color: white; cursor: pointer; font-size: 12px; display: flex; 
+                            align-items: center; justify-content: space-between; padding: 0 10px;">
+                                <span id="selectedService">OPAC</span>
+                                <span style="font-size: 10px;">▼</span>
+                            </button>
+                            <div id="searchDropdown" class="search-dropdown-menu" 
+                            style="display: none; position: absolute; top: 32px; left: 0; width: 110px; 
+                            background: white; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+                            z-index: 1000; overflow: hidden;">
+                                <div onclick="selectService('OPAC', 'http://10.125.129.43:8081')" 
+                                style="padding: 8px 10px; cursor: pointer; font-size: 12px; transition: background 0.2s;"
+                                onmouseover="this.style.backgroundColor='#f0f0f0'" 
+                                onmouseout="this.style.backgroundColor='white'">OPAC</div>
+                                <div onclick="selectService('E-Resources', 'https://fliphtml5.com/bookcase/mrqbd/')" 
+                                style="padding: 8px 10px; cursor: pointer; font-size: 12px; transition: background 0.2s;"
+                                onmouseover="this.style.backgroundColor='#f0f0f0'" 
+                                onmouseout="this.style.backgroundColor='white'">E-Resources</div>
+                                <div onclick="selectService('Institutional Repository', 'http://10.125.129.122')" 
+                                style="padding: 8px 10px; cursor: pointer; font-size: 12px; transition: background 0.2s;"
+                                onmouseover="this.style.backgroundColor='#f0f0f0'" 
+                                onmouseout="this.style.backgroundColor='white'">Institutional Repository</div>
+                            </div>
+                        </div>
+                        
                         <button type="button" onclick="performSearch()" style="width: 30px; height: 30px; 
-                        border: none; border-radius: 15px; background-color: #d9d9d9; cursor: pointer; 
-                        margin-left: 5px; display: flex; align-items: center; justify-content: center;">
+                        border: 1px solid #ccc; border-left: none; border-radius: 0 15px 15px 0; 
+                        background-color: #d9d9d9; cursor: pointer; display: flex; align-items: center; 
+                        justify-content: center; margin-left: 0;">
                             <svg width="15" height="15" viewBox="0 0 15 15">
                                 <circle cx="6" cy="6" r="4" stroke="#555" stroke-width="1.5" fill="none">
                                 </circle><line x1="8.5" y1="8.5" x2="12" y2="12" stroke="#555" 
@@ -97,123 +125,132 @@
 
             </svg>
         </div>
-        </section>
-
-    <!-- SECTION 2 : NEWS -->
-    <section class="section" id="section2">
-        
-      <h2 id="h2s2">News</h2>
-
-        <div class="slideshow-container">
-
-            <div class="mySlides">
-                <a href="https://www.untourism.int/news/international-tourist-arrivals-up-4-in-2025-reflecting-strong-travel-demand-around-the-world" 
-                target="_blank"><img src="Index Visuals/Section 2/Slides/S1 - UN Tourism News.png" alt="International tourist arrivals up 4% in 2025 reflecting strong travel demand around the world - UN Tourism"
-                title="International tourist arrivals up 4% in 2025 reflecting strong travel demand around the world - UN Tourism" /></a>
-            </div>
-
-            <div class="mySlides">
-                <a href="https://www.tourism-review.com/southeast-asias-tourism-is-mostly-recovered-news15145" target="_blank">
-                <img src="Index Visuals/Section 2/Slides/S2 - Tourism Review News.png" alt="Southeast Asia'S Tourism Industry Renaissance - Tourism Review" title="Southeast Asia'S Tourism Industry Renaissance - Tourism Review" /></a>
-            </div>
-
-            <div class="mySlides">
-                <a href="https://www.malaymail.com/news/malaysia/2025/12/18/stats-dept-malaysias-domestic-tourism-hits-216-million-visitors-rm884b-spending/202427"
-                target="_blank"><img src="Index Visuals/Section 2/Slides/S3 - Malay Mail News.png" alt="Stats Dept: Malaysia's domestic tourism hits 216 million visitors, RM88.4b spending - Malay Mail" title="Stats Dept: Malaysia's domestic tourism hits 216 million visitors, RM88.4b spending - Malay Mail" /></a>
-            </div>
-
-            <div class="mySlides">
-                <a href="https://www.thestar.com.my/news/nation/2026/01/24/restoring-trust-in-tourism-industry"
-                target="_blank"><img src="Index Visuals/Section 2/Slides/S4 - The Star A1.png" alt="Restoring Trust in tourism industry - The Star" title="Restoring Trust in tourism industry - The Star" /></a>
-            </div>
-            
-            <div class="mySlides">
-                <a href="https://www.thestar.com.my/news/nation/2025/11/13/expanding-tourism-focus-beyond-asean"
-                target="_blank"><img src="Index Visuals/Section 2/Slides/S5 - The Star A2.png" alt="Expanding tourism focus beyond Asean - The Star" title="Expanding tourism focus beyond Asean - The Star" /></a>
-            </div>
-
-            <div class="mySlides">
-                <a href="https://www.thestar.com.my/news/nation/2025/11/14/khazanah-invested-over-rm4bil-in-tourism-sites"
-                target="_blank"><img src="Index Visuals/Section 2/Slides/S6 - The Star A3.png" alt="Khazanah invested over RM4bil in tourism sites - The Star" title="Khazanah invested over RM4bil in tourism sites - The Star" /></a>
-            </div>
-
-            <div class="mySlides">
-                <a href="https://www.thestar.com.my/lifestyle/travel/2025/02/19/tourism-selangor-forges-strategic-partnerships-to-boost-vsy-2025"
-                target="_blank"><img src="Index Visuals/Section 2/Slides/S7 - The Star A4.png" alt="Tourism Selangor forges strategic partnerships to boost VSY 2025 - The Star" title="Tourism Selangor forges strategic partnerships to boost VSY 2025 - The Star" /></a>
-            </div>
-
-            <div class="mySlides">
-                <a href="https://www.bharian.com.my/bisnes/lain-lain/2025/03/1369286/malaysia-pasaran-pelancongan-keempat-paling-lestari-di-asia"
-                target="_blank"><img src="Index Visuals/Section 2/Slides/S8 - BH A1.png" alt="Malaysia pasaran pelancongan keempat paling lestari di Asia - Berita Harian" title="Malaysia pasaran pelancongan keempat paling lestari di Asia - Berita Harian" /></a>
-            </div>
-
-            <div class="mySlides">
-                <a href="https://www.bharian.com.my/berita/nasional/2025/09/1451193/malaysia-komited-bangunkan-industri-pelancongan-bertaraf-dunia-pm"
-                target="_blank"><img src="Index Visuals/Section 2/Slides/S9 - BH A2.png" alt="Malaysia komited bangunkan industri pelancongan bertaraf dunia - PM - Berita Harian" title="Malaysia komited bangunkan industri pelancongan bertaraf dunia - PM - Berita Harian" /></a>
-            </div>
-
-            <div class="mySlides">
-                <a href="https://www.sinarharian.com.my/article/740944/berita/nasional/malaysia-nombor-satu-dalam-pelancongan-mesra-muslim"
-                target="_blank"><img src="Index Visuals/Section 2/Slides/S10 - Sinar Harian News.png" alt="Malaysia nombor satu dalam Pelancongan Mesra Muslim - Sinar Harian" title="Malaysia nombor satu dalam Pelancongan Mesra Muslim - Berita Harian" /></a>
-            </div>
-
-            <div class="mySlides">
-                <a href="https://www.utusan.com.my/terkini/2021/12/langkawi-catat-pendapatan-rm487-juta/"
-                target="_blank"><img src="Index Visuals/Section 2/Slides/S11 - Utusan Malaysia News.png" alt="Langkawi catat pendapatan RM487 juta - Utusan Malaysia" title="Langkawi catat pendapatan RM487 juta - Utusan Malaysia" /></a>
-            </div>
-
-            <div class="mySlides">
-                <a href="https://www.tourism.gov.my/media/view/tourism-malaysia-dan-aeon-bekerjasama-dalam-kolaborasi-strategik-promosi-tahun-melawat-malaysia-2026"
-                target="_blank"><img src="Index Visuals/Section 2/Slides/S12 - Tourism Malaysia A1.png" alt="Tourism Malaysia dan AEON Bekerjasama dalam Kolaborasi Strategik Promosi Tahun Melawat Malaysia 2026 - Tourism Malaysia" 
-                title="Tourism Malaysia dan AEON Bekerjasama dalam Kolaborasi Strategik Promosi Tahun Melawat Malaysia 2026 - Tourism Malaysia" /></a>
-            </div>
-
-            <div class="mySlides">
-                <a href="https://www.tourism.gov.my/media/view/juneyao-air-launches-inaugural-flight-from-shanghai-to-tawau"
-                target="_blank"><img src="Index Visuals/Section 2/Slides/S13 - Tourism Malaysia A2.png" alt="Juneyao Air Launches Inaugural Flight from Shanghai to Tawau - Tourism Malaysia" 
-                title="Tourism Malaysia dan AEON Bekerjasama dalam Kolaborasi Strategik Promosi Tahun Melawat Malaysia 2026 - Tourism Malaysia" /></a>
-            </div>
-
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-        </div>
     </section>
 
-    <!-- SECTION 3 : SERVICES -->
-    <section class="section" id="section3">
-        <h2 class="section-title" id="h2s3">Our Services</h2>
+    <!-- SECTION 2 & 3 COMBINED -->
+    <section class="section combined-section" id="section2-3">
+        
+        <!-- LEFT SIDE: SERVICES (2/5) -->
+        <div class="services-container">
+            <h2 class="section-title" id="h2s3">Our Services</h2>
 
-        <div class="services-row">
+            <div class="services-grid">
 
-            <div class="service-box">
-                <a href="http://10.125.129.43:8081" target="_blank">
-                    <img src="Index Visuals/Section 3/Services Logo/Koha Logo.png" id="opac" alt="OPAC" />
-                </a>
-                <span>OPAC</span>
+                <div class="service-box">
+                    <a href="http://10.125.129.43:8081" target="_blank">
+                        <img src="Index Visuals/Section 3/Services Logo/Koha Logo.png" id="opac" alt="OPAC" />
+                    </a>
+                    <span class="service-title">OPAC</span>
+                    <p class="service-desc">Search library materials</p>
+                </div>
+
+                <div class="service-box">
+                    <a href="https://fliphtml5.com/bookcase/mrqbd/" target="_blank">
+                        <img src="Index Visuals/Section 3/Services Logo/E-Resources Logo.png" id="er" alt="E-Resources" />
+                    </a>
+                    <span class="service-title">E-Resources</span>
+                    <p class="service-desc">Digital books collection</p>
+                </div>
+
+                <div class="service-box">
+                    <a href="http://10.125.129.122" target="_blank">
+                        <img src="Index Visuals/Section 3/Services Logo/Institutional Repository Logo.png" id="ir" alt="Institutional Repository" />
+                    </a>
+                    <span class="service-title">Repository</span>
+                    <p class="service-desc">Academic works archive</p>
+                </div>
+
+                <div class="service-box">
+                    <a href="Webpages/Useful Links/Useful Links.html" target="_blank">
+                        <img src="Index Visuals/Section 3/Services Logo/Useful Links.png" alt="Useful Links" id="ul">
+                    </a>
+                    <span class="service-title">Useful Links</span>
+                    <p class="service-desc">External resources</p>
+                </div>
+
             </div>
-
-            <div class="service-box">
-                <a href="https://fliphtml5.com/bookcase/mrqbd/" target="_blank">
-                    <img src="Index Visuals/Section 3/Services Logo/E-Resources Logo.png" id="er" alt="E-Resources" />
-                </a>
-                <span>E-Resources</span>
-            </div>
-
-            <div class="service-box">
-                <a href="http://10.125.129.122" target="_blank">
-                    <img src="Index Visuals/Section 3/Services Logo/Institutional Repository Logo.png" id="ir" alt="Institutional Repository" />
-                </a>
-                <span>Institutional Repository</span>
-            </div>
-
-            <div class="service-box">
-                <a><img src="Index Visuals/Section 3/Services Logo/Useful Links.png" alt="Useful Links" id="ul">
-                </a><span>Useful<br>Links</span>
-            </div>
-
-
         </div>
+
+        <!-- RIGHT SIDE: NEWS (3/5) -->
+        <div class="news-container">
+            <h2 id="h2s2">News</h2>
+            
+            <div class="slideshow-container">
+
+                <div class="mySlides">
+                    <a href="https://www.untourism.int/news/international-tourist-arrivals-up-4-in-2025-reflecting-strong-travel-demand-around-the-world" 
+                    target="_blank"><img src="Index Visuals/Section 2/Slides/S1 - UN Tourism News.png" alt="International tourist arrivals up 4% in 2025 reflecting strong travel demand around the world - UN Tourism"
+                    title="International tourist arrivals up 4% in 2025 reflecting strong travel demand around the world - UN Tourism" /></a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.tourism-review.com/southeast-asias-tourism-is-mostly-recovered-news15145" target="_blank">
+                    <img src="Index Visuals/Section 2/Slides/S2 - Tourism Review News.png" alt="Southeast Asia'S Tourism Industry Renaissance - Tourism Review" title="Southeast Asia'S Tourism Industry Renaissance - Tourism Review" /></a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.malaymail.com/news/malaysia/2025/12/18/stats-dept-malaysias-domestic-tourism-hits-216-million-visitors-rm884b-spending/202427"
+                    target="_blank"><img src="Index Visuals/Section 2/Slides/S3 - Malay Mail News.png" alt="Stats Dept: Malaysia's domestic tourism hits 216 million visitors, RM88.4b spending - Malay Mail" title="Stats Dept: Malaysia's domestic tourism hits 216 million visitors, RM88.4b spending - Malay Mail" /></a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.thestar.com.my/news/nation/2026/01/24/restoring-trust-in-tourism-industry"
+                    target="_blank"><img src="Index Visuals/Section 2/Slides/S4 - The Star A1.png" alt="Restoring Trust in tourism industry - The Star" title="Restoring Trust in tourism industry - The Star" /></a>
+                </div>
+                
+                <div class="mySlides">
+                    <a href="https://www.thestar.com.my/news/nation/2025/11/13/expanding-tourism-focus-beyond-asean"
+                    target="_blank"><img src="Index Visuals/Section 2/Slides/S5 - The Star A2.png" alt="Expanding tourism focus beyond Asean - The Star" title="Expanding tourism focus beyond Asean - The Star" /></a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.thestar.com.my/news/nation/2025/11/14/khazanah-invested-over-rm4bil-in-tourism-sites"
+                    target="_blank"><img src="Index Visuals/Section 2/Slides/S6 - The Star A3.png" alt="Khazanah invested over RM4bil in tourism sites - The Star" title="Khazanah invested over RM4bil in tourism sites - The Star" /></a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.thestar.com.my/lifestyle/travel/2025/02/19/tourism-selangor-forges-strategic-partnerships-to-boost-vsy-2025"
+                    target="_blank"><img src="Index Visuals/Section 2/Slides/S7 - The Star A4.png" alt="Tourism Selangor forges strategic partnerships to boost VSY 2025 - The Star" title="Tourism Selangor forges strategic partnerships to boost VSY 2025 - The Star" /></a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.bharian.com.my/bisnes/lain-lain/2025/03/1369286/malaysia-pasaran-pelancongan-keempat-paling-lestari-di-asia"
+                    target="_blank"><img src="Index Visuals/Section 2/Slides/S8 - BH A1.png" alt="Malaysia pasaran pelancongan keempat paling lestari di Asia - Berita Harian" title="Malaysia pasaran pelancongan keempat paling lestari di Asia - Berita Harian" /></a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.bharian.com.my/berita/nasional/2025/09/1451193/malaysia-komited-bangunkan-industri-pelancongan-bertaraf-dunia-pm"
+                    target="_blank"><img src="Index Visuals/Section 2/Slides/S9 - BH A2.png" alt="Malaysia komited bangunkan industri pelancongan bertaraf dunia - PM - Berita Harian" title="Malaysia komited bangunkan industri pelancongan bertaraf dunia - PM - Berita Harian" /></a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.sinarharian.com.my/article/740944/berita/nasional/malaysia-nombor-satu-dalam-pelancongan-mesra-muslim"
+                    target="_blank"><img src="Index Visuals/Section 2/Slides/S10 - Sinar Harian News.png" alt="Malaysia nombor satu dalam Pelancongan Mesra Muslim - Sinar Harian" title="Malaysia nombor satu dalam Pelancongan Mesra Muslim - Berita Harian" /></a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.utusan.com.my/terkini/2021/12/langkawi-catat-pendapatan-rm487-juta/"
+                    target="_blank"><img src="Index Visuals/Section 2/Slides/S11 - Utusan Malaysia News.png" alt="Langkawi catat pendapatan RM487 juta - Utusan Malaysia" title="Langkawi catat pendapatan RM487 juta - Utusan Malaysia" /></a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.tourism.gov.my/media/view/tourism-malaysia-dan-aeon-bekerjasama-dalam-kolaborasi-strategik-promosi-tahun-melawat-malaysia-2026"
+                    target="_blank"><img src="Index Visuals/Section 2/Slides/S12 - Tourism Malaysia A1.png" alt="Tourism Malaysia dan AEON Bekerjasama dalam Kolaborasi Strategik Promosi Tahun Melawat Malaysia 2026 - Tourism Malaysia" 
+                    title="Tourism Malaysia dan AEON Bekerjasama dalam Kolaborasi Strategik Promosi Tahun Melawat Malaysia 2026 - Tourism Malaysia" /></a>
+                </div>
+
+                <div class="mySlides">
+                    <a href="https://www.tourism.gov.my/media/view/juneyao-air-launches-inaugural-flight-from-shanghai-to-tawau"
+                    target="_blank"><img src="Index Visuals/Section 2/Slides/S13 - Tourism Malaysia A2.png" alt="Juneyao Air Launches Inaugural Flight from Shanghai to Tawau - Tourism Malaysia" 
+                    title="Tourism Malaysia dan AEON Bekerjasama dalam Kolaborasi Strategik Promosi Tahun Melawat Malaysia 2026 - Tourism Malaysia" /></a>
+                </div>
+
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+            </div>
+        </div>
+
     </section>
 
 
@@ -251,8 +288,6 @@
     </svg>
 </div>
 
-
-
     
     <!-- FOOTER -->
     <footer>
@@ -278,33 +313,54 @@
     </footer>
 
 <script>
+// Search dropdown functionality
+let selectedServiceUrl = 'http://10.125.129.43:8081'; // Default to OPAC
+
+function toggleSearchDropdown() {
+    const dropdown = document.getElementById('searchDropdown');
+    if (dropdown.style.display === 'none' || dropdown.style.display === '') {
+        dropdown.style.display = 'block';
+        dropdown.style.animation = 'dropdownSlide 0.3s ease-out';
+    } else {
+        dropdown.style.display = 'none';
+    }
+}
+
+function selectService(name, url) {
+    document.getElementById('selectedService').textContent = name;
+    selectedServiceUrl = url;
+    document.getElementById('searchDropdown').style.display = 'none';
+    
+    // Update placeholder based on selected service
+    const searchInput = document.getElementById('searchInput');
+    searchInput.placeholder = `Search in ${name}...`;
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    const dropdown = document.getElementById('searchDropdown');
+    const dropdownBtn = document.getElementById('dropdownBtn');
+    if (dropdown && dropdownBtn && !dropdown.contains(event.target) && !dropdownBtn.contains(event.target)) {
+        dropdown.style.display = 'none';
+    }
+});
+
 // Search functionality
 function performSearch() {
     const searchInput = document.getElementById('searchInput').value.toLowerCase().trim();
     
-    // Define service keywords and their URLs
-    const services = {
-        'koha': 'http://10.39.111.43:8081',
-        'e-resources': 'https://fliphtml5.com/bookcase/mrqbd/',
-        'eresources': 'https://fliphtml5.com/bookcase/mrqbd/',
-        'e resources': 'https://fliphtml5.com/bookcase/mrqbd/',
-        'institutional repository': 'http://10.39.111.122',
-        'repository': 'http://10.39.111.122'
-    };
-    
-    // Check if search input matches any service
-    for (let key in services) {
-        if (searchInput.includes(key)) {
-            window.open(services[key], '_blank');
-            return;
+    // Open the selected service URL (with search query if the service supports it)
+    if (selectedServiceUrl) {
+        // For OPAC (Koha), you can append search query
+        if (selectedServiceUrl.includes('8081')) {
+            // Koha search URL format
+            window.open(`${selectedServiceUrl}/cgi-bin/koha/opac-search.pl?q=${encodeURIComponent(searchInput)}`, '_blank');
+        } else {
+            // For other services, just open the URL
+            window.open(selectedServiceUrl, '_blank');
         }
-    }
-    
-    // If no match, open all services or show alert
-    if (searchInput === '') {
-        alert('Please enter a search term (e.g., Koha, E-Resources, Repository)');
     } else {
-        alert('Service not found. Available services: Koha, E-Resources, Institutional Repository');
+        alert('Please select a service to search');
     }
 }
 
