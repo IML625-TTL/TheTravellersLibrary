@@ -13,7 +13,7 @@
 body {
     padding-top: clamp(60px, 10vh, 75px); /* offset for fixed navbar */
     font-family: 'Times New Roman', Times, serif;
-    background-color: #e5ff7d;
+    background-color: #fdfd96;
 }
 
 /* =========================
@@ -170,7 +170,7 @@ nav ul.menu li ul.dropdown li a:hover {
    ABOUT US SECTION
 ========================= */
 .about-us-section {
-    background: #e5ff7d;
+    background: #fdfd96;
     padding: 60px 30px;
     border-radius: 10px;
 }
