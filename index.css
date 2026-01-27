@@ -459,6 +459,8 @@ nav ul.menu li ul.dropdown li a {
     display: flex;
     flex-direction: column;
     min-width: 0;
+    background-color: #b3d9f2;
+    border-radius: 20px;
 }
 
 #h2s2 {
@@ -489,6 +491,7 @@ nav ul.menu li ul.dropdown li a {
     justify-content: center;
     overflow: hidden;
     background-color: #b3d9f2;
+    border-radius: 20px;
 }
 
 .mySlides {
