@@ -32,7 +32,7 @@
             <ul class="dropdown">
                 <li><a href="http://10.145.112.43:8081" target="_blank">OPAC</a></li>
                 <li><a href="https://fliphtml5.com/bookcase/mrqbd/" target="_blank">E-Resources</a></li>
-                <li><a href="http://10.125.129.122" target="_blank">Institutional Repository</a></li>
+                <li><a href="http://10.145.112.122" target="_blank">Institutional Repository</a></li>
                 <li><a href="Webpages/Useful Links/Useful Links.html" target="_blank">Useful Links</a></li>
             </ul>
         </li>
@@ -100,7 +100,7 @@
         <div id="searchDropdown" class="search-dropdown-menu">
             <div class="dropdown-item" onclick="selectService('OPAC', 'http://10.145.112.43:8081')">OPAC</div>
             <div class="dropdown-item" onclick="selectService('E-Res.', 'https://fliphtml5.com/bookcase/mrqbd/')">E-Resources</div>
-            <div class="dropdown-item" onclick="selectService('Inst. Rep.', 'http://10.125.129.122')">Institutional Repository</div>
+            <div class="dropdown-item" onclick="selectService('Inst. Rep.', 'http://10.145.112.122')">Institutional Repository</div>
         </div>
     </section>
 
@@ -130,7 +130,7 @@
                 </div>
 
                 <div class="service-box">
-                    <a href="http://10.125.129.122" target="_blank">
+                    <a href="http://10.145.112.122" target="_blank">
                         <img src="Index Visuals/Section 3/Services Logo/Institutional Repository Logo.png" id="ir" alt="Institutional Repository" />
                     </a>
                     <span class="service-title">Institutional Repository</span>
@@ -258,6 +258,9 @@
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
     transition: transform 0.3s ease;
     user-select: none;
+    /* ADDED FOR TOUCH SUPPORT */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: none;
 }
 
 .floating-icon:hover {
@@ -468,7 +471,8 @@
 </div>
 
 <!-- FLOATING CHAT ICON -->
-<div class="floating-icon" id="chatIcon" onclick="toggleChat()" aria-label="Open chat">
+<!-- REMOVED onclick from here - now handled by touch/click events in JavaScript -->
+<div class="floating-icon" id="chatIcon" aria-label="Open chat">
     <svg width="35" height="35" viewBox="0 0 24 24" fill="white">
         <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
         <circle cx="8" cy="9" r="1.5" fill="#86CFFF"/>
@@ -492,7 +496,7 @@ The Traveller's Library is a specialized library in Malaysia focused on tourism,
 OUR SERVICES:
 1. OPAC (Online Public Access Catalog) - http://10.145.112.43:8081
 2. E-Resources - https://fliphtml5.com/bookcase/mrqbd/
-3. Institutional Repository - http://10.125.129.122
+3. Institutional Repository - http://10.145.112.122
 4. Useful Links - Curated external tourism resources
 
 CONTACT INFORMATION:
@@ -514,7 +518,7 @@ const KNOWLEDGE_BASE = {
     services: {
         keywords: ['service', 'offer', 'provide', 'available', 'what can', 'features', 'facilities'],
         responses: [
-            "We offer 4 main services: OPAC (http://10.145.112.43:8081), E-Resources (https://fliphtml5.com/bookcase/mrqbd/), Institutional Repository (http://10.125.129.122), and Useful Links.",
+            "We offer 4 main services: OPAC (http://10.145.112.43:8081), E-Resources (https://fliphtml5.com/bookcase/mrqbd/), Institutional Repository (http://10.145.112.122), and Useful Links.",
             "Our library provides comprehensive services: OPAC for searching our physical catalog, E-Resources for digital books available anytime, an Institutional Repository for academic research, and Useful Links for external tourism resources."
         ]
     },
@@ -535,8 +539,8 @@ const KNOWLEDGE_BASE = {
     repository: {
         keywords: ['repository', 'research', 'paper', 'thesis', 'dissertation', 'academic', 'publication'],
         responses: [
-            "Visit our Institutional Repository at http://10.125.129.122 for research papers, theses, and dissertations focused on tourism.",
-            "Our Institutional Repository (http://10.125.129.122) archives scholarly publications, research papers, and academic theses related to tourism and hospitality."
+            "Visit our Institutional Repository at http://10.145.112.122 for research papers, theses, and dissertations focused on tourism.",
+            "Our Institutional Repository (http://10.145.112.122) archives scholarly publications, research papers, and academic theses related to tourism and hospitality."
         ]
     },
     links: {
@@ -619,20 +623,22 @@ async function getAIResponse(userText) {
     return null;
 }
 
-// ================= DRAGGABLE FLOATING ICON (mouse + touch) =================
+// ================= DRAGGABLE FLOATING ICON (IMPROVED TOUCH SUPPORT) =================
 let iconDragging = false;
 let iconOffsetX = 0, iconOffsetY = 0, touchStartTime = 0;
+let iconTouchMoved = false; // Track if touch moved
 const floatingIcon = document.getElementById('chatIcon');
 
-// Mouse drag
+// Mouse drag for desktop
 floatingIcon.addEventListener('mousedown', function(e) {
-    if (e.button === 2) return;
+    if (e.button === 2) return; // Ignore right-click
     iconDragging = true;
     floatingIcon.classList.add('dragging');
     iconOffsetX = e.clientX - floatingIcon.getBoundingClientRect().left;
     iconOffsetY = e.clientY - floatingIcon.getBoundingClientRect().top;
     e.preventDefault();
 });
+
 document.addEventListener('mousemove', function(e) {
     if (iconDragging) {
         const x = e.clientX - iconOffsetX;
@@ -643,21 +649,36 @@ document.addEventListener('mousemove', function(e) {
         floatingIcon.style.bottom = 'auto';
     }
 });
-document.addEventListener('mouseup', function() { if (iconDragging) { iconDragging = false; floatingIcon.classList.remove('dragging'); } });
 
-// Touch drag + tap-to-open
+document.addEventListener('mouseup', function() { 
+    if (iconDragging) { 
+        iconDragging = false; 
+        floatingIcon.classList.remove('dragging'); 
+    } 
+});
+
+// Mouse click to toggle chat (only if not dragging)
+floatingIcon.addEventListener('click', function(e) {
+    if (!iconDragging) {
+        toggleChat();
+    }
+});
+
+// ===== IMPROVED TOUCH SUPPORT =====
 floatingIcon.addEventListener('touchstart', function(e) {
     if (e.touches.length === 1) {
         const touch = e.touches[0];
         iconOffsetX = touch.clientX - floatingIcon.getBoundingClientRect().left;
         iconOffsetY = touch.clientY - floatingIcon.getBoundingClientRect().top;
-        iconDragging = false;
+        iconTouchMoved = false; // Reset movement tracking
         touchStartTime = Date.now();
+        e.preventDefault(); // Prevent default touch behavior
     }
-});
+}, { passive: false });
+
 floatingIcon.addEventListener('touchmove', function(e) {
     if (e.touches.length === 1) {
-        iconDragging = true;
+        iconTouchMoved = true; // Mark that touch moved
         const touch = e.touches[0];
         const x = touch.clientX - iconOffsetX;
         const y = touch.clientY - iconOffsetY;
@@ -665,12 +686,18 @@ floatingIcon.addEventListener('touchmove', function(e) {
         floatingIcon.style.top = Math.max(0, Math.min(y, window.innerHeight - floatingIcon.offsetHeight)) + 'px';
         floatingIcon.style.right = 'auto';
         floatingIcon.style.bottom = 'auto';
+        e.preventDefault(); // Prevent scrolling while dragging
     }
-});
+}, { passive: false });
+
 floatingIcon.addEventListener('touchend', function(e) {
     const touchDuration = Date.now() - touchStartTime;
-    if (!iconDragging && touchDuration < 300) toggleChat();
-});
+    // Only toggle chat if it was a quick tap (< 300ms) and didn't move
+    if (!iconTouchMoved && touchDuration < 300) {
+        toggleChat();
+    }
+    e.preventDefault();
+}, { passive: false });
 
 // ================= DRAGGABLE CHAT WINDOW =================
 let chatDragging = false, chatOffsetX = 0, chatOffsetY = 0;
@@ -793,20 +820,33 @@ document.addEventListener("DOMContentLoaded", () => {
     </footer>
 
 <script>
-// Search dropdown functionality
-let selectedServiceUrl = 'http://10.145.112.43:8081'; // Default to OPAC
+/* =========================
+   🔍 SEARCH BAR FUNCTIONALITY
+   ========================= */
 
+// Store the currently selected service URL and name
+let selectedServiceUrl = 'http://10.145.112.43:8081'; // Default to OPAC
+let selectedServiceName = 'OPAC'; // Default service name
+
+// Toggle the dropdown menu visibility
 function toggleSearchDropdown() {
     const dropdown = document.getElementById('searchDropdown');
     dropdown.classList.toggle('show');
 }
 
+// Select a service from the dropdown
 function selectService(name, url) {
+    // Update the button text to show selected service
     document.getElementById('selectedService').textContent = name;
+    
+    // Store the selected service URL and name
     selectedServiceUrl = url;
+    selectedServiceName = name;
+    
+    // Close the dropdown
     document.getElementById('searchDropdown').classList.remove('show');
     
-    // Update placeholder based on selected service
+    // Update placeholder to match selected service
     const searchInput = document.getElementById('searchInput');
     searchInput.placeholder = `Search in ${name}...`;
 }
@@ -823,26 +863,47 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// Search functionality
+// ===== 🎯 MAIN SEARCH FUNCTION - THIS IS WHERE THE MAGIC HAPPENS =====
 function performSearch() {
-    const searchInput = document.getElementById('searchInput').value.toLowerCase().trim();
+    const searchInput = document.getElementById('searchInput').value.trim();
     
-    // Open the selected service URL (with search query if the service supports it)
-    if (selectedServiceUrl) {
-        // For OPAC (Koha), you can append search query
-        if (selectedServiceUrl.includes('8081')) {
-            // Koha search URL format
-            window.open(`${selectedServiceUrl}/cgi-bin/koha/opac-search.pl?q=${encodeURIComponent(searchInput)}`, '_blank');
-        } else {
-            // For other services, just open the URL
-            window.open(selectedServiceUrl, '_blank');
-        }
+    // If search input is empty, just open the service homepage
+    if (!searchInput) {
+        window.open(selectedServiceUrl, '_blank');
+        return;
+    }
+    
+    // Build search URL based on selected service
+    let searchUrl = '';
+    
+    // 📌 OPAC (Koha) - Search in library catalog
+    if (selectedServiceName === 'OPAC') {
+        // Koha search format: /cgi-bin/koha/opac-search.pl?q=SEARCH_QUERY
+        searchUrl = `${selectedServiceUrl}/cgi-bin/koha/opac-search.pl?q=${encodeURIComponent(searchInput)}`;
+    }
+    
+    // 📌 E-Resources (FlipHTML5) - Just open the main page (no direct search available)
+    else if (selectedServiceName === 'E-Res.') {
+        // FlipHTML5 doesn't support URL-based search, so open main page
+        searchUrl = selectedServiceUrl;
+        alert(`Opening E-Resources. Please use the search function on the page to find "${searchInput}"`);
+    }
+    
+    // 📌 Institutional Repository - Search in repository
+    else if (selectedServiceName === 'Inst. Rep.') {
+        // DSpace search format: /simple-search?query=SEARCH_QUERY
+        searchUrl = `${selectedServiceUrl}/simple-search?query=${encodeURIComponent(searchInput)}`;
+    }
+    
+    // Open the constructed search URL in a new tab
+    if (searchUrl) {
+        window.open(searchUrl, '_blank');
     } else {
         alert('Please select a service to search');
     }
 }
 
-// Allow Enter key to trigger search
+// ===== ENTER KEY SUPPORT - Trigger search when user presses Enter =====
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
@@ -852,7 +913,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-}); </script>
+}); 
+</script>
+
 <script>
 
 // Slideshow functionality

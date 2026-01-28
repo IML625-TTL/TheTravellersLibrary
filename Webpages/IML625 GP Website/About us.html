@@ -31,7 +31,7 @@
             <ul class="dropdown">
                 <li><a href="http://10.145.112.43:8081" target="_blank">OPAC</a></li>
                 <li><a href="https://fliphtml5.com/bookcase/mrqbd/" target="_blank">E-Resources</a></li>
-                <li><a href="http://10.125.129.122" target="_blank">Institutional Repository</a></li>
+                <li><a href="http://10.145.112.122" target="_blank">Institutional Repository</a></li>
                 <li><a href="../Useful Links/Useful Links.html" target="_blank">Useful Links</a></li>
             </ul>
         </li>
@@ -463,6 +463,205 @@
 }
 </style>
 
+<!-- CHATBOT STYLES -->
+<style>
+/* Floating chat button */
+.floating-icon {
+    position: fixed;
+    bottom: 80px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #86cfff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: move;
+    z-index: 999;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: none;
+}
+
+.floating-icon:hover {
+    transform: scale(1.08);
+}
+
+.floating-icon.dragging {
+    cursor: grabbing;
+    transform: scale(1.1);
+}
+
+/* Chat window */
+.chat-card {
+    position: fixed;
+    bottom: 150px;
+    right: 30px;
+    width: 340px;
+    height: 480px;
+    min-width: 280px;
+    min-height: 350px;
+    max-width: 600px;
+    max-height: 80vh;
+    background-color: #fefcef;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 1000;
+    resize: both;
+}
+
+.chat-card.dragging {
+    cursor: grabbing;
+}
+
+.chat-card.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.chat-card .header {
+    background-color: #86cfff;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move;
+    user-select: none;
+}
+
+.chat-card .header:active {
+    cursor: grabbing;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+    background-color: #999ae8;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.header-info h2 {
+    font-size: 16px;
+    margin: 0;
+    color: #000435;
+}
+
+.header-info p {
+    font-size: 12px;
+    margin: 0;
+    color: #000435;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #000435;
+}
+
+.chat-body {
+    flex: 1;
+    padding: 12px;
+    overflow-y: auto;
+    background-color: #f0e29a;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.msg {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+.msg.bot {
+    background-color: #86cfff;
+    align-self: flex-start;
+}
+
+.msg.user {
+    background-color: #999ae8;
+    color: white;
+    align-self: flex-end;
+}
+
+.chat-card .footer {
+    display: flex;
+    padding: 10px;
+    gap: 8px;
+    background-color: #fefcef;
+    border-top: 2px solid rgba(0, 4, 53, 0.2);
+}
+
+.chat-card input {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: 2px solid #7e212a;
+    outline: none;
+}
+
+.send-btn {
+    background-color: #7e212a;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.chat-card::after {
+    content: '⋰';
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    font-size: 16px;
+    color: #999;
+    pointer-events: none;
+}
+
+@media screen and (max-width: 500px) {
+    .chat-card {
+        width: calc(100% - 30px);
+        right: 15px;
+        bottom: 100px;
+        max-height: 70vh;
+    }
+    .floating-icon {
+        right: 15px;
+        bottom: 30px;
+    }
+}
+</style>
+
 <!-- CHATBOT HTML -->
 <div class="chat-card" id="chatWindow" aria-hidden="true">
     <div class="header" id="chatHeader">
@@ -486,8 +685,8 @@
     </div>
 </div>
 
-<!-- FLOATING CHAT ICON -->
-<div class="floating-icon" id="chatIcon" onclick="toggleChat()" aria-label="Open chat">
+<!-- FLOATING CHAT ICON (NOTE: NO onclick attribute) -->
+<div class="floating-icon" id="chatIcon" aria-label="Open chat">
     <svg width="35" height="35" viewBox="0 0 24 24" fill="white">
         <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
         <circle cx="8" cy="9" r="1.5" fill="#86CFFF"/>
@@ -496,289 +695,152 @@
     </svg>
 </div>
 
-<!-- CHATBOT SCRIPT -->
+<!-- CHATBOT JAVASCRIPT -->
 <script>
-/* ==========================
-   CHATBOT FUNCTIONALITY
-   ========================== */
+/* CHATBOT FUNCTIONALITY */
 
-// Library context - comprehensive knowledge base
 const LIBRARY_CONTEXT = `You are Sam, a helpful AI assistant for The Traveller's Library.
 
 ABOUT THE TRAVELLER'S LIBRARY:
 The Traveller's Library is a specialized library in Malaysia focused on tourism, hospitality, and travel-related resources. Our mission is "Guiding Pathways to Tourism Knowledge." We serve students, researchers, and professionals in the tourism industry.
 
 OUR SERVICES:
-
-1. OPAC (Online Public Access Catalog)
-   URL: http://10.145.112.43:8081
-   - Search our physical book collection
-   - Koha-based library management system
-   - Browse books, journals, and materials
-   - Find tourism and hospitality resources
-
-2. E-Resources
-   URL: https://fliphtml5.com/bookcase/mrqbd/
-   - Digital collection of electronic books
-   - Tourism and hospitality e-books
-   - Available 24/7 online
-   - Accessible from anywhere
-
-3. Institutional Repository
-   URL: http://10.125.129.122
-   - Archive of academic works and research
-   - Theses and dissertations
-   - Research papers on tourism
-   - Scholarly publications
-
-4. Useful Links
-   - Curated external tourism resources
-   - Industry websites and databases
-   - Tourism organizations
-   - Research tools and references
+1. OPAC (Online Public Access Catalog) - http://10.145.112.43:8081
+2. E-Resources - https://fliphtml5.com/bookcase/mrqbd/
+3. Institutional Repository - http://10.125.129.122
+4. Useful Links - Curated external tourism resources
 
 CONTACT INFORMATION:
 Email: searah2024@gmail.com
 Facebook: https://www.facebook.com/share/181qiN9eAF/?mibextid=wwXIfr
 Instagram: @travellers_library (https://www.instagram.com/travellers_library)
 
-TEAM & ABOUT US:
-This is a group project under IML625 course. The library portal was created to provide comprehensive tourism knowledge and resources to the academic community and tourism professionals.
+Always be concise, helpful, and include relevant URLs when directing users.`;
 
-COLLECTIONS:
-- Tourism management books and journals
-- Hospitality industry resources
-- Travel and destination marketing materials
-- Sustainable tourism publications
-- Tourism research papers and theses
-- Digital tourism resources
-
-HOW TO HELP USERS:
-- Answer questions about library services
-- Direct users to appropriate resources (OPAC, E-Resources, Repository)
-- Explain how to search for materials
-- Provide tourism-related information
-- Share contact details when needed
-- Be friendly, professional, and helpful
-
-When users ask about:
-- Books/physical materials → Direct to OPAC
-- E-books/digital resources → Direct to E-Resources
-- Research papers/theses → Direct to Institutional Repository
-- External resources → Mention Useful Links
-- Contact/help → Provide email and social media
-
-Always be concise (2-4 sentences), helpful, and include relevant URLs when directing to services.`;
-
-// Comprehensive fallback knowledge base
 const KNOWLEDGE_BASE = {
     about: {
         keywords: ['what is', 'about', 'tell me about', 'describe', 'explain', 'who are you', 'library', 'mission', 'purpose'],
         responses: [
-            "The Traveller's Library is a specialized library focused on tourism, hospitality, and travel resources in Malaysia. Our mission is 'Guiding Pathways to Tourism Knowledge.' We serve students, researchers, and tourism professionals with comprehensive resources including books, e-books, and research papers.",
-            "We're The Traveller's Library - your gateway to tourism knowledge! We specialize in tourism, hospitality, and travel information, offering physical books via OPAC, digital resources through E-Resources, and academic papers in our Institutional Repository. This is a group project under IML625."
+            "The Traveller's Library is a specialized library focused on tourism, hospitality, and travel resources in Malaysia. Our mission is 'Guiding Pathways to Tourism Knowledge.' We serve students, researchers, and tourism professionals.",
+            "We're The Traveller's Library - your gateway to tourism knowledge! We specialize in tourism, hospitality, and travel information, offering physical books via OPAC, digital resources through E-Resources, and academic papers in our Institutional Repository."
         ]
     },
-    
     services: {
-        keywords: ['service', 'offer', 'provide', 'available', 'what can', 'what do you', 'features', 'facilities', 'main service'],
+        keywords: ['service', 'offer', 'provide', 'available', 'what can', 'features', 'facilities'],
         responses: [
-            "We offer 4 main services:\n\n1️⃣ OPAC (http://10.145.112.43:8081) - Search physical books\n2️⃣ E-Resources (https://fliphtml5.com/bookcase/mrqbd/) - Access digital books 24/7\n3️⃣ Institutional Repository (http://10.125.129.122) - Browse research papers\n4️⃣ Useful Links - Explore curated tourism resources\n\nWhich interests you?",
-            "Our library provides comprehensive services: OPAC for searching our physical catalog, E-Resources for digital books available anytime, an Institutional Repository for academic research, and Useful Links for external tourism resources. All focused on tourism and hospitality! What would you like to explore?"
+            "We offer 4 main services: OPAC (http://10.145.112.43:8081), E-Resources (https://fliphtml5.com/bookcase/mrqbd/), Institutional Repository (http://10.125.129.122), and Useful Links.",
+            "Our library provides comprehensive services: OPAC for searching our physical catalog, E-Resources for digital books available anytime, an Institutional Repository for academic research, and Useful Links for external tourism resources."
         ]
     },
-    
     opac: {
-        keywords: ['opac', 'book', 'catalog', 'catalogue', 'physical', 'borrow', 'search book', 'find book', 'koha', 'library catalog', 'printed book'],
+        keywords: ['opac', 'book', 'catalog', 'catalogue', 'physical', 'borrow', 'search book'],
         responses: [
-            "Search for books using our OPAC at http://10.145.112.43:8081 📚\n\nOur Koha-based system lets you browse our entire collection of physical materials including books, journals, and tourism resources. You can search by title, author, subject, or keyword!",
-            "Our OPAC (Online Public Access Catalog) is at http://10.145.112.43:8081. It's your gateway to discovering all our physical books and materials on tourism, hospitality, and travel. The system is easy to use - just search for what you need!"
+            "Search for books using our OPAC at http://10.145.112.43:8081. Browse physical books, journals, and tourism resources easily!",
+            "Our OPAC (http://10.145.112.43:8081) lets you discover all physical books and materials on tourism, hospitality, and travel. Search by title, author, or subject."
         ]
     },
-    
     eresources: {
-        keywords: ['ebook', 'e-book', 'e-resource', 'digital', 'online book', 'electronic', 'pdf', 'download', 'virtual', 'digital book', 'online resource'],
+        keywords: ['ebook', 'e-book', 'digital', 'online book', 'electronic', 'pdf', 'download'],
         responses: [
-            "Access our E-Resources collection 24/7 at https://fliphtml5.com/bookcase/mrqbd/ 💻\n\nWe have digital books on tourism and hospitality that you can access anytime, anywhere - perfect for online research and study!",
-            "Our digital library is available at https://fliphtml5.com/bookcase/mrqbd/ with e-books on tourism, hospitality, and travel. These resources are accessible around the clock, so you can study whenever it suits you!"
+            "Access our E-Resources collection 24/7 at https://fliphtml5.com/bookcase/mrqbd/ with digital books on tourism and hospitality.",
+            "Our digital library is available at https://fliphtml5.com/bookcase/mrqbd/ for e-books on tourism, hospitality, and travel."
         ]
     },
-    
     repository: {
-        keywords: ['repository', 'research', 'paper', 'thesis', 'dissertation', 'academic', 'publication', 'journal', 'scholarly', 'study', 'research paper'],
+        keywords: ['repository', 'research', 'paper', 'thesis', 'dissertation', 'academic', 'publication'],
         responses: [
-            "Visit our Institutional Repository at http://10.125.129.122 📄\n\nIt contains academic works including research papers, theses, and dissertations focused on tourism. Excellent for researchers and students working on tourism projects!",
-            "Our Institutional Repository (http://10.125.129.122) archives scholarly publications, research papers, and academic theses related to tourism and hospitality. It's a valuable collection for serious research work!"
+            "Visit our Institutional Repository at http://10.125.129.122 for research papers, theses, and dissertations focused on tourism.",
+            "Our Institutional Repository (http://10.125.129.122) archives scholarly publications, research papers, and academic theses related to tourism and hospitality."
         ]
     },
-    
     links: {
-        keywords: ['useful link', 'external', 'website', 'other resource', 'link', 'outside', 'web', 'external resource', 'other site'],
+        keywords: ['useful link', 'external', 'website', 'other resource', 'link'],
         responses: [
-            "Our Useful Links section provides curated external resources including tourism organizations, databases, industry websites, and research tools. These carefully selected links complement our collections with additional tourism knowledge sources.",
-            "We maintain a collection of Useful Links to external tourism resources - databases, industry websites, tourism organizations, and government resources. These enhance your research with additional specialized sources!"
+            "Our Useful Links section provides curated external tourism resources including industry websites, databases, and research tools.",
+            "We maintain a collection of Useful Links to external tourism resources - databases, industry websites, and government resources."
         ]
     },
-    
-    tourism: {
-        keywords: ['tourism', 'travel', 'hospitality', 'hotel', 'destination', 'tourist', 'vacation', 'industry', 'tourism industry'],
-        responses: [
-            "As a tourism-focused library, we specialize in tourism management, hospitality, travel industry, destination marketing, sustainable tourism, and more. Our collections support research across all aspects of tourism - accessible via OPAC, E-Resources, and our Repository!",
-            "We're dedicated to tourism resources! Whether you're studying tourism management, researching travel trends, exploring hospitality operations, or investigating sustainable tourism, we have materials across all our services to support your work."
-        ]
-    },
-    
     contact: {
-        keywords: ['contact', 'email', 'reach', 'get in touch', 'message', 'phone', 'address', 'location', 'facebook', 'instagram', 'social media', 'how to contact'],
+        keywords: ['contact', 'email', 'reach', 'get in touch', 'message', 'facebook', 'instagram'],
         responses: [
-            "Contact us:\n📧 Email: searah2024@gmail.com\n📘 Facebook: https://www.facebook.com/share/181qiN9eAF/\n📷 Instagram: @travellers_library\n\nFeel free to reach out with any questions!",
-            "Get in touch:\n• Email: searah2024@gmail.com\n• Facebook: https://www.facebook.com/share/181qiN9eAF/?mibextid=wwXIfr\n• Instagram: https://www.instagram.com/travellers_library\n\nWe're here to help!"
+            "Contact us: Email: searah2024@gmail.com | Facebook: https://www.facebook.com/share/181qiN9eAF | Instagram: @travellers_library",
+            "Get in touch: Email: searah2024@gmail.com | Facebook: https://www.facebook.com/share/181qiN9eAF | Instagram: https://www.instagram.com/travellers_library"
         ]
     },
-    
-    help: {
-        keywords: ['how to', 'how do i', 'help', 'guide', 'tutorial', 'instruction', 'use', 'access', 'start', 'begin', 'need help'],
-        responses: [
-            "Here's how to use our services:\n📚 Books → OPAC: http://10.145.112.43:8081\n💻 E-books → E-Resources: https://fliphtml5.com/bookcase/mrqbd/\n📄 Research → Repository: http://10.125.129.122\n🔗 External → Useful Links section\n\nWhat would you like to explore?",
-            "I can guide you! Looking for:\n• Physical books? → Use OPAC\n• Digital resources? → Try E-Resources\n• Academic papers? → Visit our Repository\n• External sites? → Check Useful Links\n\nWhat interests you?"
-        ]
-    },
-    
-    hours: {
-        keywords: ['hour', 'open', 'close', 'time', 'when', 'available', 'access time', 'operating', 'opening hour', 'schedule'],
-        responses: [
-            "Our digital services (E-Resources at https://fliphtml5.com/bookcase/mrqbd/ and Institutional Repository at http://10.125.129.122) are available 24/7! For physical library hours and OPAC access times, please contact us at searah2024@gmail.com.",
-            "E-Resources and our Repository are accessible 24/7 online! For information about physical library operating hours, reach out to searah2024@gmail.com or check our Facebook page."
-        ]
-    },
-    
-    collection: {
-        keywords: ['collection', 'material', 'have', 'find', 'looking for', 'resource', 'database', 'what do you have'],
-        responses: [
-            "Our collection includes tourism books, hospitality journals, travel guides, research papers, e-books, and academic publications. Search via:\n• OPAC for physical items\n• E-Resources for digital materials\n• Repository for academic works\n\nWhat topic are you researching?",
-            "We have extensive tourism and hospitality collections: books, journals, e-books, research papers, and theses. These are accessible through OPAC (http://10.145.112.43:8081), E-Resources (https://fliphtml5.com/bookcase/mrqbd/), and our Repository. What subject interests you?"
-        ]
-    },
-    
-    search: {
-        keywords: ['search', 'find', 'look for', 'looking', 'where can i find', 'how to find', 'locate'],
-        responses: [
-            "To search our resources:\n1. Physical books → OPAC: http://10.145.112.43:8081\n2. Digital books → E-Resources: https://fliphtml5.com/bookcase/mrqbd/\n3. Research papers → Repository: http://10.125.129.122\n\nWhat type of material are you looking for?",
-            "You can search different ways:\n• OPAC for physical books and materials\n• E-Resources for digital/online books\n• Institutional Repository for academic research\n\nTell me what you need and I'll point you in the right direction!"
-        ]
-    },
-    
-    team: {
-        keywords: ['team', 'staff', 'who made', 'developer', 'creator', 'built', 'iml625', 'group project', 'student'],
-        responses: [
-            "The Traveller's Library is a group project under the IML625 course. It was developed by a team of students to provide comprehensive tourism knowledge resources to the academic community. For more details, visit our About Us page or contact us at searah2024@gmail.com!",
-            "This library portal is a collaborative group project for the IML625 course! Our team worked to create this specialized tourism resource center. You can learn more by visiting our About Us page or reaching out at searah2024@gmail.com."
-        ]
-    },
-    
     greeting: {
-        keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening', 'greetings', 'hola', 'howdy'],
+        keywords: ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'good evening'],
         responses: [
-            "Hello! 👋 I'm Sam, your assistant at The Traveller's Library. I can help you find books, e-resources, research papers, and answer questions about our tourism collections. What can I help you with today?",
-            "Hi there! Welcome to The Traveller's Library! I'm Sam, and I can guide you through our OPAC, E-Resources, Institutional Repository, and more. How may I assist you?",
-            "Hey! I'm Sam from The Traveller's Library. Whether you need books, e-books, research papers, or just have questions about our tourism resources, I'm here to help! What would you like to know?"
+            "Hello! 👋 I'm Sam, your assistant at The Traveller's Library. How can I help you today?",
+            "Hi there! Welcome to The Traveller's Library! I'm Sam, your AI guide."
         ]
     },
-    
     thanks: {
-        keywords: ['thank', 'thanks', 'appreciate', 'helpful', 'great', 'awesome', 'good job', 'perfect'],
+        keywords: ['thank', 'thanks', 'appreciate'],
         responses: [
-            "You're very welcome! 😊 If you need anything else about our library services or tourism resources, feel free to ask. Happy researching!",
-            "My pleasure! Don't hesitate to ask if you have more questions about The Traveller's Library. Enjoy exploring our resources!",
-            "Glad I could help! Come back anytime you need assistance with books, e-resources, or research. Good luck with your tourism studies! 📚"
+            "You're welcome! 😊 Let me know if you need more help with our resources.",
+            "Glad to help! Enjoy exploring The Traveller's Library."
         ]
     },
-    
     goodbye: {
-        keywords: ['bye', 'goodbye', 'see you', 'later', 'take care', 'gotta go', 'leave'],
+        keywords: ['bye', 'goodbye', 'see you', 'later', 'take care'],
         responses: [
-            "Goodbye! 👋 Come back anytime you need help with The Traveller's Library resources. Happy travels in your research journey!",
-            "Take care! Feel free to return whenever you need assistance. Good luck with your tourism research!",
-            "See you later! Remember, we're here 24/7 for digital resources. Visit us again soon! 🌍"
+            "Goodbye! 👋 Come back anytime you need help with The Traveller's Library resources.",
+            "Take care! Visit us again soon."
         ]
     }
 };
 
-// Find best matching response from knowledge base
 function findFallbackResponse(userText) {
     const text = userText.toLowerCase();
     let bestMatch = null;
     let maxMatches = 0;
-    
+
     for (const [category, data] of Object.entries(KNOWLEDGE_BASE)) {
         let matches = 0;
         for (const keyword of data.keywords) {
-            if (text.includes(keyword)) {
-                matches++;
-            }
+            if (text.includes(keyword)) matches++;
         }
-        
         if (matches > maxMatches) {
             maxMatches = matches;
             bestMatch = category;
         }
     }
-    
+
     if (bestMatch && maxMatches > 0) {
         const responses = KNOWLEDGE_BASE[bestMatch].responses;
         return responses[Math.floor(Math.random() * responses.length)];
     }
-    
     return null;
 }
 
-// Try AI response with Hugging Face (free, no API key needed for some models)
 async function getAIResponse(userText) {
     try {
-        const prompt = `${LIBRARY_CONTEXT}\n\nUser question: ${userText}\n\nRespond as Sam in 2-4 sentences. Be helpful and include relevant URLs when directing to services:`;
-        
-        // Using free Hugging Face Inference API
-        const response = await fetch(
-            "https://api-inference.huggingface.co/models/microsoft/DialoGPT-large",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    inputs: prompt,
-                    parameters: {
-                        max_length: 200,
-                        temperature: 0.7,
-                        return_full_text: false
-                    }
-                })
-            }
-        );
-
+        const prompt = `${LIBRARY_CONTEXT}\n\nUser question: ${userText}\n\nRespond as Sam in 2-4 sentences:`;
+        const response = await fetch("https://api-inference.huggingface.co/models/microsoft/DialoGPT-large", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ inputs: prompt, parameters: { max_length: 200, temperature: 0.7, return_full_text: false } })
+        });
         if (response.ok) {
             const data = await response.json();
-            if (data && data[0] && data[0].generated_text) {
-                return data[0].generated_text.trim();
-            }
+            if (data && data[0] && data[0].generated_text) return data[0].generated_text.trim();
         }
     } catch (error) {
         console.log("AI service unavailable, using fallback:", error);
     }
-    
     return null;
 }
 
-// Draggable functionality for floating icon
-let isDraggingIcon = false;
-let iconOffsetX = 0;
-let iconOffsetY = 0;
-
+// ========== IMPROVED DRAGGABLE ICON WITH TOUCH SUPPORT ==========
+let iconDragging = false;
+let iconOffsetX = 0, iconOffsetY = 0, touchStartTime = 0;
+let iconTouchMoved = false;
 const floatingIcon = document.getElementById('chatIcon');
 
+// Mouse events
 floatingIcon.addEventListener('mousedown', function(e) {
     if (e.button === 2) return;
-    isDraggingIcon = true;
+    iconDragging = true;
     floatingIcon.classList.add('dragging');
     iconOffsetX = e.clientX - floatingIcon.getBoundingClientRect().left;
     iconOffsetY = e.clientY - floatingIcon.getBoundingClientRect().top;
@@ -786,38 +848,71 @@ floatingIcon.addEventListener('mousedown', function(e) {
 });
 
 document.addEventListener('mousemove', function(e) {
-    if (isDraggingIcon) {
+    if (iconDragging) {
         const x = e.clientX - iconOffsetX;
         const y = e.clientY - iconOffsetY;
-        
-        const maxX = window.innerWidth - floatingIcon.offsetWidth;
-        const maxY = window.innerHeight - floatingIcon.offsetHeight;
-        
-        floatingIcon.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
-        floatingIcon.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
+        floatingIcon.style.left = Math.max(0, Math.min(x, window.innerWidth - floatingIcon.offsetWidth)) + 'px';
+        floatingIcon.style.top = Math.max(0, Math.min(y, window.innerHeight - floatingIcon.offsetHeight)) + 'px';
         floatingIcon.style.right = 'auto';
         floatingIcon.style.bottom = 'auto';
     }
 });
 
-document.addEventListener('mouseup', function() {
-    if (isDraggingIcon) {
-        isDraggingIcon = false;
-        floatingIcon.classList.remove('dragging');
+document.addEventListener('mouseup', function() { 
+    if (iconDragging) { 
+        iconDragging = false; 
+        floatingIcon.classList.remove('dragging'); 
+    } 
+});
+
+floatingIcon.addEventListener('click', function(e) {
+    if (!iconDragging) {
+        toggleChat();
     }
 });
 
-// Draggable functionality for chat window
-let isDraggingChat = false;
-let chatOffsetX = 0;
-let chatOffsetY = 0;
+// Touch events (IMPROVED)
+floatingIcon.addEventListener('touchstart', function(e) {
+    if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        iconOffsetX = touch.clientX - floatingIcon.getBoundingClientRect().left;
+        iconOffsetY = touch.clientY - floatingIcon.getBoundingClientRect().top;
+        iconTouchMoved = false;
+        touchStartTime = Date.now();
+        e.preventDefault();
+    }
+}, { passive: false });
 
+floatingIcon.addEventListener('touchmove', function(e) {
+    if (e.touches.length === 1) {
+        iconTouchMoved = true;
+        const touch = e.touches[0];
+        const x = touch.clientX - iconOffsetX;
+        const y = touch.clientY - iconOffsetY;
+        floatingIcon.style.left = Math.max(0, Math.min(x, window.innerWidth - floatingIcon.offsetWidth)) + 'px';
+        floatingIcon.style.top = Math.max(0, Math.min(y, window.innerHeight - floatingIcon.offsetHeight)) + 'px';
+        floatingIcon.style.right = 'auto';
+        floatingIcon.style.bottom = 'auto';
+        e.preventDefault();
+    }
+}, { passive: false });
+
+floatingIcon.addEventListener('touchend', function(e) {
+    const touchDuration = Date.now() - touchStartTime;
+    if (!iconTouchMoved && touchDuration < 300) {
+        toggleChat();
+    }
+    e.preventDefault();
+}, { passive: false });
+
+// ========== DRAGGABLE CHAT WINDOW ==========
+let chatDragging = false, chatOffsetX = 0, chatOffsetY = 0;
 const chatWindow = document.getElementById('chatWindow');
 const chatHeader = document.getElementById('chatHeader');
 
 chatHeader.addEventListener('mousedown', function(e) {
     if (e.target.classList.contains('close-btn')) return;
-    isDraggingChat = true;
+    chatDragging = true;
     chatWindow.classList.add('dragging');
     chatOffsetX = e.clientX - chatWindow.getBoundingClientRect().left;
     chatOffsetY = e.clientY - chatWindow.getBoundingClientRect().top;
@@ -825,163 +920,95 @@ chatHeader.addEventListener('mousedown', function(e) {
 });
 
 document.addEventListener('mousemove', function(e) {
-    if (isDraggingChat) {
+    if (chatDragging) {
         const x = e.clientX - chatOffsetX;
         const y = e.clientY - chatOffsetY;
-        
-        const maxX = window.innerWidth - chatWindow.offsetWidth;
-        const maxY = window.innerHeight - chatWindow.offsetHeight;
-        
-        chatWindow.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
-        chatWindow.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
+        chatWindow.style.left = Math.max(0, Math.min(x, window.innerWidth - chatWindow.offsetWidth)) + 'px';
+        chatWindow.style.top = Math.max(0, Math.min(y, window.innerHeight - chatWindow.offsetHeight)) + 'px';
         chatWindow.style.right = 'auto';
         chatWindow.style.bottom = 'auto';
     }
 });
 
-document.addEventListener('mouseup', function() {
-    if (isDraggingChat) {
-        isDraggingChat = false;
-        chatWindow.classList.remove('dragging');
+document.addEventListener('mouseup', function() { 
+    if (chatDragging) { 
+        chatDragging = false; 
+        chatWindow.classList.remove('dragging'); 
+    } 
+});
+
+chatHeader.addEventListener('touchstart', function(e) {
+    if (e.target.classList.contains('close-btn')) return;
+    if (e.touches.length === 1) {
+        const touch = e.touches[0];
+        chatDragging = true;
+        chatOffsetX = touch.clientX - chatWindow.getBoundingClientRect().left;
+        chatOffsetY = touch.clientY - chatWindow.getBoundingClientRect().top;
     }
 });
 
-// Chat toggle
+chatHeader.addEventListener('touchmove', function(e) {
+    if (chatDragging && e.touches.length === 1) {
+        const touch = e.touches[0];
+        const x = touch.clientX - chatOffsetX;
+        const y = touch.clientY - chatOffsetY;
+        chatWindow.style.left = Math.max(0, Math.min(x, window.innerWidth - chatWindow.offsetWidth)) + 'px';
+        chatWindow.style.top = Math.max(0, Math.min(y, window.innerHeight - chatWindow.offsetHeight)) + 'px';
+    }
+});
+
+chatHeader.addEventListener('touchend', function() { 
+    chatDragging = false; 
+});
+
+// ========== CHAT FUNCTIONS ==========
 function toggleChat() {
-    if (isDraggingIcon) return;
     const chatWindow = document.getElementById('chatWindow');
     chatWindow.classList.toggle('active');
-    chatWindow.setAttribute(
-        'aria-hidden',
-        !chatWindow.classList.contains('active')
-    );
+    chatWindow.setAttribute('aria-hidden', !chatWindow.classList.contains('active'));
 }
 
-// Send message - hybrid approach
 async function sendMessage() {
     const input = document.getElementById('userInput');
     const chatBody = document.getElementById('chatBody');
     const userText = input.value.trim();
+    if (!userText) return;
 
-    if (userText === "") return;
-
-    // User bubble
     const userDiv = document.createElement('div');
     userDiv.className = 'msg user';
     userDiv.textContent = userText;
     chatBody.appendChild(userDiv);
-
-    input.value = "";
+    input.value = '';
     chatBody.scrollTop = chatBody.scrollHeight;
 
-    // Typing indicator
     const botDiv = document.createElement('div');
     botDiv.className = 'msg bot';
     botDiv.textContent = "Sam is typing...";
     chatBody.appendChild(botDiv);
     chatBody.scrollTop = chatBody.scrollHeight;
 
-    // First, check for instant fallback response
-    const fallbackResponse = findFallbackResponse(userText);
-    
-    if (fallbackResponse) {
-        // Use fallback immediately for known questions
-        setTimeout(() => {
-            botDiv.textContent = fallbackResponse;
-            chatBody.scrollTop = chatBody.scrollHeight;
+    const fallback = findFallbackResponse(userText);
+    if (fallback) {
+        setTimeout(() => { 
+            botDiv.textContent = fallback; 
+            chatBody.scrollTop = chatBody.scrollHeight; 
         }, 300);
     } else {
-        // Try AI for unknown questions, fallback if it fails
-        const aiResponse = await getAIResponse(userText);
-        
+        const aiResp = await getAIResponse(userText);
         setTimeout(() => {
-            if (aiResponse && aiResponse.length > 10) {
-                botDiv.textContent = aiResponse;
-            } else {
-                // Ultimate fallback
-                botDiv.textContent = "I'm here to help with The Traveller's Library! You can ask me about:\n• Our services (OPAC, E-Resources, Repository)\n• How to find books or e-books\n• Research papers and resources\n• Tourism collections\n• Contact information\n\nWhat would you like to know?";
-            }
+            botDiv.textContent = (aiResp && aiResp.length > 10) ? aiResp : 
+                "I'm here to help with The Traveller's Library! Ask me about services, resources, or contact info.";
             chatBody.scrollTop = chatBody.scrollHeight;
         }, 500);
     }
 }
 
-// Enter key support
 document.addEventListener("DOMContentLoaded", () => {
     const input = document.getElementById("userInput");
-    if (input) {
-        input.addEventListener("keypress", (e) => {
-            if (e.key === "Enter") sendMessage();
-        });
-    }
-});
-
-// Touch support for mobile
-floatingIcon.addEventListener('touchstart', function(e) {
-    isDraggingIcon = true;
-    floatingIcon.classList.add('dragging');
-    const touch = e.touches[0];
-    iconOffsetX = touch.clientX - floatingIcon.getBoundingClientRect().left;
-    iconOffsetY = touch.clientY - floatingIcon.getBoundingClientRect().top;
-    e.preventDefault();
-});
-
-document.addEventListener('touchmove', function(e) {
-    if (isDraggingIcon) {
-        const touch = e.touches[0];
-        const x = touch.clientX - iconOffsetX;
-        const y = touch.clientY - iconOffsetY;
-        
-        const maxX = window.innerWidth - floatingIcon.offsetWidth;
-        const maxY = window.innerHeight - floatingIcon.offsetHeight;
-        
-        floatingIcon.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
-        floatingIcon.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
-        floatingIcon.style.right = 'auto';
-        floatingIcon.style.bottom = 'auto';
-    }
-});
-
-document.addEventListener('touchend', function() {
-    if (isDraggingIcon) {
-        isDraggingIcon = false;
-        floatingIcon.classList.remove('dragging');
-    }
-});
-
-chatHeader.addEventListener('touchstart', function(e) {
-    if (e.target.classList.contains('close-btn')) return;
-    isDraggingChat = true;
-    chatWindow.classList.add('dragging');
-    const touch = e.touches[0];
-    chatOffsetX = touch.clientX - chatWindow.getBoundingClientRect().left;
-    chatOffsetY = touch.clientY - chatWindow.getBoundingClientRect().top;
-    e.preventDefault();
-});
-
-document.addEventListener('touchmove', function(e) {
-    if (isDraggingChat) {
-        const touch = e.touches[0];
-        const x = touch.clientX - chatOffsetX;
-        const y = touch.clientY - chatOffsetY;
-        
-        const maxX = window.innerWidth - chatWindow.offsetWidth;
-        const maxY = window.innerHeight - chatWindow.offsetHeight;
-        
-        chatWindow.style.left = Math.max(0, Math.min(x, maxX)) + 'px';
-        chatWindow.style.top = Math.max(0, Math.min(y, maxY)) + 'px';
-        chatWindow.style.right = 'auto';
-        chatWindow.style.bottom = 'auto';
-    }
-});
-
-document.addEventListener('touchend', function() {
-    if (isDraggingChat) {
-        isDraggingChat = false;
-        chatWindow.classList.remove('dragging');
-    }
+    if (input) input.addEventListener("keypress", e => { if (e.key === "Enter") sendMessage(); });
 });
 </script>
+
 
 
 
