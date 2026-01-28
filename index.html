@@ -863,7 +863,7 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// ===== 🎯 MAIN SEARCH FUNCTION - THIS IS WHERE THE MAGIC HAPPENS =====
+// ===== 🎯 MAIN SEARCH FUNCTION =====
 function performSearch() {
     const searchInput = document.getElementById('searchInput').value.trim();
     
@@ -878,21 +878,18 @@ function performSearch() {
     
     // 📌 OPAC (Koha) - Search in library catalog
     if (selectedServiceName === 'OPAC') {
-        // Koha search format: /cgi-bin/koha/opac-search.pl?q=SEARCH_QUERY
         searchUrl = `${selectedServiceUrl}/cgi-bin/koha/opac-search.pl?q=${encodeURIComponent(searchInput)}`;
     }
     
-    // 📌 E-Resources (FlipHTML5) - Just open the main page (no direct search available)
+    // 📌 E-Resources (FlipHTML5) - Just open the main page
     else if (selectedServiceName === 'E-Res.') {
-        // FlipHTML5 doesn't support URL-based search, so open main page
         searchUrl = selectedServiceUrl;
         alert(`Opening E-Resources. Please use the search function on the page to find "${searchInput}"`);
     }
     
-    // 📌 Institutional Repository - Search in repository
+    // 📌 Institutional Repository (EPrints) - Search in repository
     else if (selectedServiceName === 'Inst. Rep.') {
-        // DSpace search format: /simple-search?query=SEARCH_QUERY
-        searchUrl = `${selectedServiceUrl}/simple-search?query=${encodeURIComponent(searchInput)}`;
+        searchUrl = `${selectedServiceUrl}/cgi/search/simple?q=${encodeURIComponent(searchInput)}`;
     }
     
     // Open the constructed search URL in a new tab
@@ -903,7 +900,7 @@ function performSearch() {
     }
 }
 
-// ===== ENTER KEY SUPPORT - Trigger search when user presses Enter =====
+// ===== ENTER KEY SUPPORT =====
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
